@@ -1,0 +1,30 @@
+{
+  "name": "finz-micro-investing-budgeting",
+  "version": "1.0.0",
+  "description": "FinZ — Gamified Micro-Investing & Budgeting Platform khusus Gen Z",
+  "scripts": {
+    "start": "node server/server.js",
+    "server": "node server/server.js",
+    "client": "npm run dev --prefix client",
+    "dev": "node server/server.js",
+    "next:dev": "npm run dev --prefix finz-nextjs",
+    "next:build": "npm run build --prefix finz-nextjs",
+    "next:typecheck": "npm run typecheck --prefix finz-nextjs",
+    "next:test": "npm run test --prefix finz-nextjs",
+    "build:client": "npm run build --prefix client",
+    "build": "npm run build:client",
+    "install:all": "cd server && npm install && cd ../client && npm install"
+  },
+  "keywords": [
+    "finz",
+    "gen-z",
+    "micro-investing",
+    "budgeting",
+    "gamification",
+    "spare-change-roundup",
+    "react",
+    "express"
+  ],
+  "author": "FinZ Team",
+  "license": "MIT"
+}

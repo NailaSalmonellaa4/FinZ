@@ -1,0 +1,1343 @@
+{
+  "user": {
+    "id": "usr_genz_01",
+    "name": "Arya Pratama",
+    "handle": "@aryafinanz",
+    "tagline": "Tech Savvy Frugal King 👑",
+    "avatar": "⚡",
+    "level": 4,
+    "xp": 2780,
+    "xpToNextLevel": 2500,
+    "streak": 7,
+    "streakLastActive": "2026-10-20",
+    "cashBalance": 1263000,
+    "roundUpSettings": {
+      "enabled": true,
+      "multiplier": 5,
+      "targetAssetId": "green-future",
+      "accumulatedRoundUp": 12500,
+      "autoInvestThreshold": 50000
+    },
+    "soundEnabled": true
+  },
+  "assets": [
+    {
+      "id": "green-future",
+      "name": "🌿 ESG EcoWarrior",
+      "category": "Green Energy & Clean Tech",
+      "risk": "Sedang",
+      "riskColor": "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+      "return1Y": 18.4,
+      "unitPrice": 15400,
+      "priceChange24h": 2.45,
+      "description": "Keranjang portofolio saham energi baru terbarukan (EBT), carbon credit, dan industri ramah lingkungan.",
+      "topHoldings": [
+        {
+          "symbol": "PGEO",
+          "name": "Pertamina Geothermal",
+          "share": 40
+        },
+        {
+          "symbol": "BREN",
+          "name": "Barito Renewables",
+          "share": 35
+        },
+        {
+          "symbol": "ARKO",
+          "name": "Arkora Hydro",
+          "share": 25
+        }
+      ],
+      "chartData": [
+        {
+          "date": "Sen",
+          "price": 14800
+        },
+        {
+          "date": "Sel",
+          "price": 14950
+        },
+        {
+          "date": "Rab",
+          "price": 15100
+        },
+        {
+          "date": "Kam",
+          "price": 15020
+        },
+        {
+          "date": "Jum",
+          "price": 15250
+        },
+        {
+          "date": "Sab",
+          "price": 15320
+        },
+        {
+          "date": "Min",
+          "price": 15400
+        }
+      ]
+    },
+    {
+      "id": "ai-cyber",
+      "name": "⚡ Gen Z AI Titans",
+      "category": "AI, Chips & Cloud",
+      "risk": "Tinggi",
+      "riskColor": "text-purple-400 bg-purple-500/10 border-purple-500/20",
+      "return1Y": 34.2,
+      "unitPrice": 28500,
+      "priceChange24h": 4.12,
+      "description": "Pecahan mikro raksasa semikonduktor dunia, komputasi AI LLM, dan cloud infrastructure terdepan.",
+      "topHoldings": [
+        {
+          "symbol": "NVDA",
+          "name": "Nvidia Fractional",
+          "share": 45
+        },
+        {
+          "symbol": "MSFT",
+          "name": "Microsoft Cloud",
+          "share": 30
+        },
+        {
+          "symbol": "GOOGL",
+          "name": "Alphabet AI",
+          "share": 25
+        }
+      ],
+      "chartData": [
+        {
+          "date": "Sen",
+          "price": 26200
+        },
+        {
+          "date": "Sel",
+          "price": 26800
+        },
+        {
+          "date": "Rab",
+          "price": 27150
+        },
+        {
+          "date": "Kam",
+          "price": 27600
+        },
+        {
+          "date": "Jum",
+          "price": 27900
+        },
+        {
+          "date": "Sab",
+          "price": 28100
+        },
+        {
+          "date": "Min",
+          "price": 28500
+        }
+      ]
+    },
+    {
+      "id": "indo-foodie",
+      "name": "☕ Indo Foodie & FMCG",
+      "category": "Consumer Staples & F&B",
+      "risk": "Rendah",
+      "riskColor": "text-blue-400 bg-blue-500/10 border-blue-500/20",
+      "return1Y": 9.8,
+      "unitPrice": 11200,
+      "priceChange24h": 0.65,
+      "description": "Brand F&B dan retail yang setia menemani keseharian Gen Z dari mie instan sampai minimarket 24 jam.",
+      "topHoldings": [
+        {
+          "symbol": "ICBP",
+          "name": "Indofood CBP Sukses",
+          "share": 45
+        },
+        {
+          "symbol": "AMRT",
+          "name": "Sumber Alfaria Trijaya",
+          "share": 35
+        },
+        {
+          "symbol": "MYOR",
+          "name": "Mayora Indah",
+          "share": 20
+        }
+      ],
+      "chartData": [
+        {
+          "date": "Sen",
+          "price": 11050
+        },
+        {
+          "date": "Sel",
+          "price": 11100
+        },
+        {
+          "date": "Rab",
+          "price": 11120
+        },
+        {
+          "date": "Kam",
+          "price": 11180
+        },
+        {
+          "date": "Jum",
+          "price": 11150
+        },
+        {
+          "date": "Sab",
+          "price": 11190
+        },
+        {
+          "date": "Min",
+          "price": 11200
+        }
+      ]
+    },
+    {
+      "id": "digital-gold",
+      "name": "🪙 Micro-Emas 24K",
+      "category": "Safe Haven & Digital Bullion",
+      "risk": "Konservatif",
+      "riskColor": "text-amber-400 bg-amber-500/10 border-amber-500/20",
+      "return1Y": 14.6,
+      "unitPrice": 138000,
+      "priceChange24h": 0.85,
+      "description": "Emas fisik 99.99% tersimpan di brankas berstandar internasional, bisa dicicil pecahan mulai Rp 5.000.",
+      "topHoldings": [
+        {
+          "symbol": "GOLD",
+          "name": "Emas Batangan Terverifikasi",
+          "share": 100
+        }
+      ],
+      "chartData": [
+        {
+          "date": "Sen",
+          "price": 135000
+        },
+        {
+          "date": "Sel",
+          "price": 135800
+        },
+        {
+          "date": "Rab",
+          "price": 136200
+        },
+        {
+          "date": "Kam",
+          "price": 136900
+        },
+        {
+          "date": "Jum",
+          "price": 137400
+        },
+        {
+          "date": "Sab",
+          "price": 137800
+        },
+        {
+          "date": "Min",
+          "price": 138000
+        }
+      ]
+    },
+    {
+      "id": "crypto-micro",
+      "name": "🌐 Web3 Bluechip Fractional",
+      "category": "Digital Assets",
+      "risk": "Sangat Tinggi",
+      "riskColor": "text-pink-400 bg-pink-500/10 border-pink-500/20",
+      "return1Y": 48.9,
+      "unitPrice": 65000,
+      "priceChange24h": -1.2,
+      "description": "Pecahan mikro Bitcoin & Ethereum teratas untuk kamu yang berani cari high return jangka panjang.",
+      "topHoldings": [
+        {
+          "symbol": "BTC",
+          "name": "Bitcoin Micro",
+          "share": 60
+        },
+        {
+          "symbol": "ETH",
+          "name": "Ethereum Micro",
+          "share": 40
+        }
+      ],
+      "chartData": [
+        {
+          "date": "Sen",
+          "price": 61000
+        },
+        {
+          "date": "Sel",
+          "price": 63500
+        },
+        {
+          "date": "Rab",
+          "price": 66200
+        },
+        {
+          "date": "Kam",
+          "price": 64800
+        },
+        {
+          "date": "Jum",
+          "price": 67000
+        },
+        {
+          "date": "Sab",
+          "price": 66000
+        },
+        {
+          "date": "Min",
+          "price": 65000
+        }
+      ]
+    }
+  ],
+  "userHoldings": [
+    {
+      "assetId": "green-future",
+      "units": 142.6623,
+      "avgBuyPrice": 14222,
+      "totalInvested": 2029000,
+      "currentValue": 2196999.42,
+      "gainLoss": 167999.41999999993,
+      "gainLossPercent": 8.28
+    },
+    {
+      "assetId": "ai-cyber",
+      "units": 42.8772,
+      "avgBuyPrice": 25170,
+      "totalInvested": 1079200,
+      "currentValue": 1222000.2,
+      "gainLoss": 142800.19999999995,
+      "gainLossPercent": 13.23
+    },
+    {
+      "assetId": "digital-gold",
+      "units": 3.4,
+      "avgBuyPrice": 132000,
+      "totalInvested": 448800,
+      "currentValue": 469200,
+      "gainLoss": 20400,
+      "gainLossPercent": 4.55
+    }
+  ],
+  "transactions": [
+    {
+      "id": "tx-1792457095444",
+      "title": "Kopi Janji Temu Creamy Oat",
+      "category": "Coffee & Nongkrong",
+      "type": "expense",
+      "amount": 24500,
+      "roundUpAmount": 2500,
+      "roundedTotal": 27000,
+      "date": "2026-10-20T00:44:55.444Z",
+      "icon": "Receipt",
+      "isRoundUpEligible": true,
+      "investedTo": "green-future",
+      "note": "Simulasi Belanja FinZ"
+    },
+    {
+      "id": "tx-1792457094631",
+      "title": "Kopi Janji Temu Creamy Oat",
+      "category": "Coffee & Nongkrong",
+      "type": "expense",
+      "amount": 24500,
+      "roundUpAmount": 2500,
+      "roundedTotal": 27000,
+      "date": "2026-10-20T00:44:54.631Z",
+      "icon": "Receipt",
+      "isRoundUpEligible": true,
+      "investedTo": "green-future",
+      "note": "Simulasi Belanja FinZ"
+    },
+    {
+      "id": "tx-1792457093543",
+      "title": "Kopi Janji Temu Creamy Oat",
+      "category": "Coffee & Nongkrong",
+      "type": "expense",
+      "amount": 24500,
+      "roundUpAmount": 2500,
+      "roundedTotal": 27000,
+      "date": "2026-10-20T00:44:53.543Z",
+      "icon": "Receipt",
+      "isRoundUpEligible": true,
+      "investedTo": "green-future",
+      "note": "Simulasi Belanja FinZ"
+    },
+    {
+      "id": "tx-1792457092257",
+      "title": "Kopi Janji Temu Creamy Oat",
+      "category": "Coffee & Nongkrong",
+      "type": "expense",
+      "amount": 24500,
+      "roundUpAmount": 2500,
+      "roundedTotal": 27000,
+      "date": "2026-10-20T00:44:52.257Z",
+      "icon": "Receipt",
+      "isRoundUpEligible": true,
+      "investedTo": "green-future",
+      "note": "Simulasi Belanja FinZ"
+    },
+    {
+      "id": "tx-1792456097099",
+      "title": "Kopi Janji Temu Creamy Oat",
+      "category": "Coffee & Nongkrong",
+      "type": "expense",
+      "amount": 24500,
+      "roundUpAmount": 2500,
+      "roundedTotal": 27000,
+      "date": "2026-10-20T00:28:17.099Z",
+      "icon": "Receipt",
+      "isRoundUpEligible": true,
+      "investedTo": "green-future",
+      "note": "Simulasi Belanja FinZ"
+    },
+    {
+      "id": "tx-1792456050186",
+      "title": "Sweep Pundi Receh ke 🌿 ESG EcoWarrior",
+      "category": "Investasi Mikro",
+      "type": "invest",
+      "amount": 41000,
+      "roundUpAmount": 0,
+      "roundedTotal": 41000,
+      "date": "2026-10-20T00:27:30.186Z",
+      "icon": "Sparkles",
+      "isRoundUpEligible": false,
+      "investedTo": "green-future",
+      "note": "Auto-invest sisa receh terkumpul"
+    },
+    {
+      "id": "tx-1792455376888",
+      "title": "Kopi Janji Temu Creamy Oat",
+      "category": "Coffee & Nongkrong",
+      "type": "expense",
+      "amount": 24500,
+      "roundUpAmount": 2500,
+      "roundedTotal": 27000,
+      "date": "2026-10-20T00:16:16.888Z",
+      "icon": "Receipt",
+      "isRoundUpEligible": true,
+      "investedTo": "green-future",
+      "note": "Simulasi Belanja FinZ"
+    },
+    {
+      "id": "tx-1792455166616",
+      "title": "Beli Mikro: ⚡ Gen Z AI Titans",
+      "category": "Investasi Mikro",
+      "type": "invest",
+      "amount": 25000,
+      "roundUpAmount": 0,
+      "roundedTotal": 25000,
+      "date": "2026-10-20T00:12:46.616Z",
+      "icon": "TrendingUp",
+      "isRoundUpEligible": false,
+      "investedTo": "ai-cyber",
+      "note": "Beli 0.8772 unit ⚡ Gen Z AI Titans"
+    },
+    {
+      "id": "tx-101",
+      "title": "Kopi Kenangan Mantan + Croissant",
+      "category": "Coffee & Nongkrong",
+      "type": "expense",
+      "amount": 42300,
+      "roundUpAmount": 7700,
+      "roundedTotal": 50000,
+      "date": "2026-10-19T22:11:20.151Z",
+      "icon": "Coffee",
+      "isRoundUpEligible": true,
+      "investedTo": "green-future",
+      "note": "Teman nugas di coffeeshop"
+    },
+    {
+      "id": "tx-102",
+      "title": "Super Indo Belanja Mingguan",
+      "category": "Kebutuhan Pokok",
+      "type": "expense",
+      "amount": 184200,
+      "roundUpAmount": 5800,
+      "roundedTotal": 190000,
+      "date": "2026-10-19T00:11:20.151Z",
+      "icon": "ShoppingCart",
+      "isRoundUpEligible": true,
+      "investedTo": "green-future",
+      "note": "Bahan masak hemat"
+    },
+    {
+      "id": "tx-103",
+      "title": "Auto-Invest Pundi Receh (Round-Up)",
+      "category": "Investasi Mikro",
+      "type": "invest",
+      "amount": 50000,
+      "roundUpAmount": 0,
+      "roundedTotal": 50000,
+      "date": "2026-10-18T00:11:20.151Z",
+      "icon": "Sparkles",
+      "isRoundUpEligible": false,
+      "investedTo": "green-future",
+      "note": "Auto-sweep sisa receh ke ESG EcoWarrior"
+    },
+    {
+      "id": "tx-104",
+      "title": "Freelance UI Design Gig",
+      "category": "Side Hustle Income",
+      "type": "income",
+      "amount": 750000,
+      "roundUpAmount": 0,
+      "roundedTotal": 750000,
+      "date": "2026-10-17T00:11:20.151Z",
+      "icon": "ArrowDownLeft",
+      "isRoundUpEligible": false,
+      "note": "Pembayaran project landing page"
+    },
+    {
+      "id": "tx-105",
+      "title": "Spotify Family Subscription",
+      "category": "Langganan Digital",
+      "type": "expense",
+      "amount": 28000,
+      "roundUpAmount": 2000,
+      "roundedTotal": 30000,
+      "date": "2026-10-16T00:11:20.151Z",
+      "icon": "Music",
+      "isRoundUpEligible": true,
+      "investedTo": "ai-cyber",
+      "note": "Split bill bulanan"
+    },
+    {
+      "id": "ca219aa0-64c0-43a2-a1e7-92f6b18b0162",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "type": "income",
+      "category": "Gaji / Uang Saku",
+      "description": "Uang Saku Bulan Ini",
+      "amount": 1500000,
+      "date": "2026-10-20T00:00:00.000Z",
+      "createdAt": "2026-10-20T00:47:45.980Z"
+    },
+    {
+      "id": "507b68be-6b5d-43a0-8ba3-bf8d4d5e18e8",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "type": "expense",
+      "category": "Makanan & Minuman",
+      "description": "Makan Siang Nasi Uduk",
+      "amount": 25000,
+      "date": "2026-10-20T00:00:00.000Z",
+      "createdAt": "2026-10-20T00:47:45.992Z"
+    },
+    {
+      "id": "7667a369-a63f-4a50-8bfe-66a3408f0af9",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "type": "income",
+      "category": "Penjualan Barang",
+      "description": "Preloved baggy jeans",
+      "amount": 500000,
+      "date": "2026-10-20T00:00:00.000Z",
+      "createdAt": "2026-10-20T00:52:37.350Z"
+    },
+    {
+      "id": "9f0bdd3f-2eb7-43f5-ad60-c90b19c30446",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "type": "expense",
+      "category": "Makanan & Minuman",
+      "description": "ngopi bolo",
+      "amount": 250000,
+      "date": "2026-10-20T00:00:00.000Z",
+      "createdAt": "2026-10-20T01:00:44.096Z"
+    },
+    {
+      "id": "c55a4aee-acfe-4528-9abb-c3515831fbd4",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "type": "expense",
+      "category": "Makanan & Minuman",
+      "description": "jajan",
+      "amount": 4000,
+      "date": "2026-10-20T00:00:00.000Z",
+      "createdAt": "2026-10-20T01:32:08.931Z"
+    }
+  ],
+  "monthlyBudget": {
+    "month": "Oktober 2026",
+    "totalIncome": 4500000,
+    "categories": [
+      {
+        "id": "needs",
+        "name": "Kebutuhan Pokok (50%)",
+        "color": "#3b82f6",
+        "allocated": 2250000,
+        "spent": 1480000,
+        "icon": "Home"
+      },
+      {
+        "id": "wants",
+        "name": "Lifestyle & Nongkrong (30%)",
+        "color": "#ec4899",
+        "allocated": 1350000,
+        "spent": 980000,
+        "icon": "Coffee"
+      },
+      {
+        "id": "investments",
+        "name": "Investasi & Dana Darurat (20%)",
+        "color": "#10b981",
+        "allocated": 900000,
+        "spent": 720000,
+        "icon": "TrendingUp"
+      }
+    ]
+  },
+  "quests": [
+    {
+      "id": "q-1",
+      "title": "Catat Pengeluaran Hari Ini",
+      "desc": "Latih kesadaran dompet dengan input minimal 1 struk transaksi.",
+      "rewardXp": 50,
+      "progress": 1,
+      "target": 1,
+      "completed": true,
+      "claimed": true,
+      "type": "daily",
+      "icon": "Receipt"
+    },
+    {
+      "id": "q-2",
+      "title": "Kumpulkan Receh Round-Up Rp 20.000",
+      "desc": "Aktifkan round-up belanjaanmu hingga menyentuh pundi Rp 20.000.",
+      "rewardXp": 100,
+      "progress": 12500,
+      "target": 20000,
+      "completed": true,
+      "claimed": true,
+      "type": "daily",
+      "icon": "Coins"
+    },
+    {
+      "id": "q-3",
+      "title": "Top-Up Investasi Mikro Min. Rp 10.000",
+      "desc": "Tanam bibit aset ke salah satu Vibe Portfolio pilihanmu.",
+      "rewardXp": 150,
+      "progress": 1,
+      "target": 1,
+      "completed": true,
+      "claimed": true,
+      "type": "daily",
+      "icon": "Zap"
+    },
+    {
+      "id": "q-4",
+      "title": "Pertahankan Streak 7 Hari Berturut-turut",
+      "desc": "Buka FinZ dan periksa performa pundi tokomu 7 hari tanpa bolong.",
+      "rewardXp": 300,
+      "progress": 7,
+      "target": 7,
+      "completed": true,
+      "claimed": true,
+      "type": "weekly",
+      "icon": "Flame"
+    },
+    {
+      "id": "q-5",
+      "title": "Uji Nyali di Kuis Melek Finansial",
+      "desc": "Jawab kuis literasi keuangan dan buktikan kamu anti fomo pinjol.",
+      "rewardXp": 120,
+      "progress": 0,
+      "target": 1,
+      "completed": false,
+      "claimed": false,
+      "type": "weekly",
+      "icon": "Award"
+    }
+  ],
+  "badges": [
+    {
+      "id": "b-1",
+      "name": "🔥 Streak Master",
+      "desc": "Login & aktif menabung 7 hari berturut-turut.",
+      "unlocked": true,
+      "unlockedAt": "2026-10-18",
+      "rarity": "Rare",
+      "color": "from-amber-500 to-orange-600"
+    },
+    {
+      "id": "b-2",
+      "name": "☕ Boba Ascetic",
+      "desc": "Berhasil nahan jajan manis dan alihkan ke investasi.",
+      "unlocked": true,
+      "unlockedAt": "2026-10-15",
+      "rarity": "Epic",
+      "color": "from-pink-500 to-rose-600"
+    },
+    {
+      "id": "b-3",
+      "name": "🪙 Spare Change Alchemist",
+      "desc": "Mengumpulkan total Rp 100.000 hanya dari sisa pembulatan receh.",
+      "unlocked": true,
+      "unlockedAt": "2026-10-12",
+      "rarity": "Common",
+      "color": "from-emerald-500 to-teal-600"
+    },
+    {
+      "id": "b-4",
+      "name": "🛡️ Anti-Pinjol Shield",
+      "desc": "Punya cadangan dana darurat minimal 1 bulan pengeluaran.",
+      "unlocked": false,
+      "unlockedAt": null,
+      "rarity": "Legendary",
+      "color": "from-blue-500 to-indigo-600"
+    },
+    {
+      "id": "b-5",
+      "name": "💎 Diamond Hands Gen Z",
+      "desc": "Hold portofolio mikro tanpa panic selling selama 30 hari.",
+      "unlocked": false,
+      "unlockedAt": null,
+      "rarity": "Mythic",
+      "color": "from-purple-500 to-violet-600"
+    }
+  ],
+  "quizQuestions": [
+    {
+      "id": "qz-1",
+      "question": "Apa konsekuensi nyata jika sering pakai 'Paylater' atau Pinjol untuk barang konsumtif (misal tiket konser)?",
+      "options": [
+        "Aman aja selagi limit masih banyak dan ada diskon cashback.",
+        "Bunga majemuk & denda keterlambatan merusak skor SLIK OJK dan menjerat cashflow masa depan.",
+        "Malah bikin reputasi finansial naik karena rajin transaksi kredit.",
+        "Ga ada masalah, tinggal uninstall aplikasinya kalau ga mampu bayar."
+      ],
+      "correctAnswer": 1,
+      "explanation": "Paylater konsumtif memiliki bunga efektif tahunan tinggi. Gagal bayar masuk blacklist SLIK OJK, menghambat KPR atau cicilan produktif masa depan!",
+      "xpReward": 50
+    },
+    {
+      "id": "qz-2",
+      "question": "Apa prinsip dasar strategi investasi mikro 'Spare Change Round-Up'?",
+      "options": [
+        "Mengumpulkan sisa kembalian receh secara otomatis untuk dibelikan aset pecahan berkala (DCA).",
+        "Menjual seluruh tabungan saat market kripto sedang crash.",
+        "Membeli saham gorengan dengan uang pinjaman teman.",
+        "Menabung hanya kalau ada sisa uang di akhir tahun saja."
+      ],
+      "correctAnswer": 0,
+      "explanation": "Round-up mengubah selisih pembulatan belanja (misal Rp 7.700 dari sisa belanja kopi) menjadi investasi mikro tanpa terasa membebani dompet!",
+      "xpReward": 50
+    },
+    {
+      "id": "qz-3",
+      "question": "Rumus alokasi budgeting populer Gen Z '50/30/20' membagi penghasilan untuk apa saja?",
+      "options": [
+        "50% Nongkrong, 30% Belanja Wishlist, 20% Bayar Paylater",
+        "50% Kebutuhan Pokok, 30% Keinginan (Lifestyle), 20% Tabungan/Investasi",
+        "50% Saham spekulatif, 30% Kripto micin, 20% Jajan boba",
+        "50% Beli gadget baru, 30% Liburan, 20% Minta orang tua"
+      ],
+      "correctAnswer": 1,
+      "explanation": "Aturan 50/30/20 menjamin fondasi hidup aman (50%), tetap bisa menikmati hidup tanpa bersalah (30%), dan masa depan terus bertumbuh (20%)!",
+      "xpReward": 50
+    },
+    {
+      "id": "qz-4",
+      "question": "Apa yang dimaksud dengan 'FOMO Spending Barrier' / Aturan 72 Jam sebelum checkout barang mahal?",
+      "options": [
+        "Checkout secepat mungkin dalam 72 detik sebelum diskon flash sale hangus.",
+        "Menunggu 72 jam untuk meredakan lonjakan dopamin dan mengevaluasi apakah barang tersebut benar-benar butuh atau cuma nafsu sesaat.",
+        "Meminjam uang ke teman dalam waktu 72 jam.",
+        "Membeli 3 barang sekaligus dalam 72 jam berturut-turut."
+      ],
+      "correctAnswer": 1,
+      "explanation": "72-Hour Rule adalah psikologi anti-impulsive buying: 80% keinginan impulsif mereda setelah dopamin emosional sesaat menurun!",
+      "xpReward": 50
+    }
+  ],
+  "wishlists": [
+    {
+      "id": "w-1",
+      "title": "🎧 Headphone Wireless Nugas",
+      "targetAmount": 850000,
+      "currentAmount": 520000,
+      "icon": "Headphones",
+      "category": "Gadget",
+      "createdAt": "2026-10-20T00:26:29.004Z"
+    },
+    {
+      "id": "w-2",
+      "title": "🎟️ Tiket Konser Niki / Festival Musik",
+      "targetAmount": 1400000,
+      "currentAmount": 890000,
+      "icon": "Ticket",
+      "category": "Lifestyle",
+      "createdAt": "2026-10-20T00:26:29.004Z"
+    },
+    {
+      "id": "w-3",
+      "title": "🎮 Battle Pass Game & Skin Idaman",
+      "targetAmount": 350000,
+      "currentAmount": 350000,
+      "icon": "Gamepad2",
+      "category": "Gaming",
+      "createdAt": "2026-10-20T00:26:29.004Z"
+    }
+  ],
+  "users": [
+    {
+      "id": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "name": "Alya Syabila",
+      "email": "alya@finz.id",
+      "passwordHash": "$2b$10$lL1RZeQOkh32dMRkfKjgf.MdnjvEHmXcjl7gXjm9tts7dkc5lrNnC",
+      "virtualBalance": 4965400,
+      "xp": 385,
+      "level": 2,
+      "streak": 1,
+      "lastActiveDate": "2026-10-20",
+      "soundEnabled": true,
+      "createdAt": "2026-10-20T00:47:45.696Z",
+      "coins": 150,
+      "inventory": [
+        "clothes-hoodie"
+      ],
+      "equippedOutfit": {
+        "hat": null,
+        "clothes": "clothes-hoodie",
+        "accessory": null
+      },
+      "mascot": "cat",
+      "bio": "Belajar mengelola uang sejak dini 🚀"
+    },
+    {
+      "id": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "name": "Nela",
+      "email": "nela@gmail.com",
+      "passwordHash": "$2b$10$/V5YDMDzCC/itcB7QH6mMuVImKooYZZg2Vg86gx5GVlZa6NV17fUu",
+      "virtualBalance": 4910000,
+      "xp": 215,
+      "level": 1,
+      "streak": 1,
+      "lastActiveDate": "2026-10-20",
+      "soundEnabled": true,
+      "createdAt": "2026-10-20T00:51:47.990Z",
+      "coins": 150,
+      "inventory": [
+        "clothes-hoodie"
+      ],
+      "equippedOutfit": {
+        "hat": null,
+        "clothes": "clothes-hoodie",
+        "accessory": null
+      },
+      "mascot": "cat",
+      "bio": "Belajar mengelola uang sejak dini 🚀"
+    }
+  ],
+  "budgets": [
+    {
+      "id": "f66476b5-d400-467b-82e5-8e3d69f19088",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "month": "2026-10",
+      "category": "Makanan & Minuman",
+      "limitAmount": 500000,
+      "createdAt": "2026-10-20T00:47:45.996Z"
+    },
+    {
+      "id": "4cec3743-b673-44bf-97d6-0e02c367ba72",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "month": "2026-10",
+      "category": "Makanan & Minuman",
+      "limitAmount": 8000,
+      "createdAt": "2026-10-20T01:01:09.823Z"
+    }
+  ],
+  "savingTargets": [
+    {
+      "id": "22a0ad54-03c6-4c59-a8bc-af93da2ddcaf",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "name": "Beli Sepatu Sneakers",
+      "targetAmount": 750000,
+      "currentAmount": 150000,
+      "deadline": "2026-12-31",
+      "createdAt": "2026-10-20T00:47:46.006Z"
+    }
+  ],
+  "savingDeposits": [
+    {
+      "id": "eb04df79-cbe9-4435-a0d4-9611ebbd1583",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "targetId": "22a0ad54-03c6-4c59-a8bc-af93da2ddcaf",
+      "amount": 150000,
+      "note": "",
+      "date": "2026-10-20T00:47:46.014Z"
+    }
+  ],
+  "investAssets": [
+    {
+      "id": "asset-green",
+      "name": "🌿 EcoWarrior Fund",
+      "category": "Energi Hijau & Terbarukan",
+      "risk": "Sedang",
+      "riskColor": "text-emerald-400 bg-emerald-500/10 border-emerald-500/20",
+      "pricePerUnit": 15400,
+      "priceChange24h": 2.45,
+      "return1Y": 18.4,
+      "description": "Simulasi aset berisi perusahaan energi terbarukan. Harga adalah data contoh untuk pembelajaran.",
+      "holdings": [
+        {
+          "symbol": "PGEO",
+          "name": "Geothermal Tbk",
+          "share": 40
+        },
+        {
+          "symbol": "BREN",
+          "name": "Renewables Corp",
+          "share": 35
+        },
+        {
+          "symbol": "ARKO",
+          "name": "Hydro Power",
+          "share": 25
+        }
+      ],
+      "chartData": [
+        {
+          "day": "Sen",
+          "price": 14800
+        },
+        {
+          "day": "Sel",
+          "price": 14950
+        },
+        {
+          "day": "Rab",
+          "price": 15100
+        },
+        {
+          "day": "Kam",
+          "price": 15020
+        },
+        {
+          "day": "Jum",
+          "price": 15250
+        },
+        {
+          "day": "Sab",
+          "price": 15320
+        },
+        {
+          "day": "Min",
+          "price": 15400
+        }
+      ]
+    },
+    {
+      "id": "asset-tech",
+      "name": "⚡ Tech & AI Growth",
+      "category": "Teknologi & Kecerdasan Buatan",
+      "risk": "Tinggi",
+      "riskColor": "text-purple-400 bg-purple-500/10 border-purple-500/20",
+      "pricePerUnit": 28500,
+      "priceChange24h": 4.12,
+      "return1Y": 34.2,
+      "description": "Simulasi aset teknologi global. Harga adalah data contoh untuk pembelajaran, bukan harga pasar nyata.",
+      "holdings": [
+        {
+          "symbol": "NVDA-V",
+          "name": "Chip Tech (Virtual)",
+          "share": 45
+        },
+        {
+          "symbol": "MSFT-V",
+          "name": "Cloud Giant (Virtual)",
+          "share": 30
+        },
+        {
+          "symbol": "GOOGL-V",
+          "name": "AI Search (Virtual)",
+          "share": 25
+        }
+      ],
+      "chartData": [
+        {
+          "day": "Sen",
+          "price": 26200
+        },
+        {
+          "day": "Sel",
+          "price": 26800
+        },
+        {
+          "day": "Rab",
+          "price": 27150
+        },
+        {
+          "day": "Kam",
+          "price": 27600
+        },
+        {
+          "day": "Jum",
+          "price": 27900
+        },
+        {
+          "day": "Sab",
+          "price": 28100
+        },
+        {
+          "day": "Min",
+          "price": 28500
+        }
+      ]
+    },
+    {
+      "id": "asset-consumer",
+      "name": "☕ Konsumsi & Ritel",
+      "category": "Kebutuhan Sehari-hari & Ritel",
+      "risk": "Rendah",
+      "riskColor": "text-blue-400 bg-blue-500/10 border-blue-500/20",
+      "pricePerUnit": 11200,
+      "priceChange24h": 0.65,
+      "return1Y": 9.8,
+      "description": "Simulasi aset perusahaan F&B dan ritel. Harga contoh untuk pembelajaran konsep investasi.",
+      "holdings": [
+        {
+          "symbol": "FOOD-V",
+          "name": "Mie & Snack Corp (Virtual)",
+          "share": 45
+        },
+        {
+          "symbol": "MART-V",
+          "name": "Minimarket Tbk (Virtual)",
+          "share": 35
+        },
+        {
+          "symbol": "BISK-V",
+          "name": "Biskuit & Wafer (Virtual)",
+          "share": 20
+        }
+      ],
+      "chartData": [
+        {
+          "day": "Sen",
+          "price": 11050
+        },
+        {
+          "day": "Sel",
+          "price": 11100
+        },
+        {
+          "day": "Rab",
+          "price": 11120
+        },
+        {
+          "day": "Kam",
+          "price": 11180
+        },
+        {
+          "day": "Jum",
+          "price": 11150
+        },
+        {
+          "day": "Sab",
+          "price": 11190
+        },
+        {
+          "day": "Min",
+          "price": 11200
+        }
+      ]
+    },
+    {
+      "id": "asset-gold",
+      "name": "🪙 Emas Virtual 24K",
+      "category": "Logam Mulia (Simulasi)",
+      "risk": "Konservatif",
+      "riskColor": "text-amber-400 bg-amber-500/10 border-amber-500/20",
+      "pricePerUnit": 138000,
+      "priceChange24h": 0.85,
+      "return1Y": 14.6,
+      "description": "Simulasi investasi emas. Bukan emas fisik sungguhan. Harga adalah data contoh untuk tujuan edukasi.",
+      "holdings": [
+        {
+          "symbol": "GOLD-V",
+          "name": "Emas Virtual Terverifikasi",
+          "share": 100
+        }
+      ],
+      "chartData": [
+        {
+          "day": "Sen",
+          "price": 135000
+        },
+        {
+          "day": "Sel",
+          "price": 135800
+        },
+        {
+          "day": "Rab",
+          "price": 136200
+        },
+        {
+          "day": "Kam",
+          "price": 136900
+        },
+        {
+          "day": "Jum",
+          "price": 137400
+        },
+        {
+          "day": "Sab",
+          "price": 137800
+        },
+        {
+          "day": "Min",
+          "price": 138000
+        }
+      ]
+    }
+  ],
+  "investPortfolios": [
+    {
+      "id": "4c04c238-b766-4a7c-945d-e6003f7a3bd2",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "assetId": "asset-green",
+      "units": 2.246753,
+      "avgBuyPrice": 15400,
+      "totalInvested": 34599.9962
+    },
+    {
+      "id": "171105aa-4c85-44d3-a391-36807240752b",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "assetId": "asset-gold",
+      "units": 0.652174,
+      "avgBuyPrice": 137999.98,
+      "totalInvested": 90000
+    }
+  ],
+  "investHistory": [
+    {
+      "id": "9b0f87a5-317b-4ba5-8a64-732e696eb08d",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "assetId": "asset-green",
+      "assetName": "🌿 EcoWarrior Fund",
+      "type": "buy",
+      "units": 3.246753,
+      "pricePerUnit": 15400,
+      "totalAmount": 50000,
+      "virtualBalanceBefore": 5000000,
+      "virtualBalanceAfter": 4950000,
+      "date": "2026-10-20T00:50:03.936Z"
+    },
+    {
+      "id": "ce324f03-0d48-4d4b-beec-501711c00c3d",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "assetId": "asset-green",
+      "assetName": "🌿 EcoWarrior Fund",
+      "type": "sell",
+      "units": 1,
+      "pricePerUnit": 15400,
+      "totalAmount": 15400,
+      "virtualBalanceBefore": 4950000,
+      "virtualBalanceAfter": 4965400,
+      "date": "2026-10-20T00:50:03.945Z"
+    },
+    {
+      "id": "01c9dddd-8a6e-4eab-b292-c350dc4c237c",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "assetId": "asset-gold",
+      "assetName": "🪙 Emas Virtual 24K",
+      "type": "buy",
+      "units": 0.652174,
+      "pricePerUnit": 138000,
+      "totalAmount": 90000,
+      "virtualBalanceBefore": 5000000,
+      "virtualBalanceAfter": 4910000,
+      "date": "2026-10-20T01:01:38.112Z"
+    }
+  ],
+  "userQuests": [
+    {
+      "id": "47f87851-0993-4be0-8dd3-ee55974f0c38",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "questId": "q-1",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    },
+    {
+      "id": "f1fa593d-0d53-4abd-b398-fbf975f116a9",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "questId": "q-2",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    },
+    {
+      "id": "9869ef77-2cce-4e17-a29e-6f4646d4e372",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "questId": "q-3",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    },
+    {
+      "id": "dd32b998-4d6b-4685-ac7f-e3cbd2cc3884",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "questId": "q-4",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    },
+    {
+      "id": "913c6089-2973-4d66-bc8c-2e993f5c2320",
+      "userId": "b16938d7-fc2b-4103-a10f-f7488879a4e6",
+      "questId": "q-5",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    },
+    {
+      "id": "9842a33a-cbc4-491e-a0a5-8c7a0a0345ba",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "questId": "q-1",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    },
+    {
+      "id": "ebbc48c5-2ed9-4b09-8fd8-0a1b43256ae5",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "questId": "q-2",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    },
+    {
+      "id": "c9e4846b-f56c-46e6-a5ea-bc688dd883e0",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "questId": "q-3",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    },
+    {
+      "id": "a4f7bde2-f1c7-4f67-aaad-f407985ab66e",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "questId": "q-4",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    },
+    {
+      "id": "b7189630-8e53-4cfc-9ac8-690faabd676a",
+      "userId": "8a2b116e-f0e4-4dd8-91d2-8f7c07574e25",
+      "questId": "q-5",
+      "progress": 0,
+      "completed": false,
+      "claimed": false,
+      "resetDate": "2026-10-20"
+    }
+  ],
+  "userBadges": [],
+  "wardrobeItems": [
+    {
+      "id": "hat-grad",
+      "name": "Topi Sarjana Finansial",
+      "type": "hat",
+      "price": 100,
+      "icon": "🎓",
+      "description": "Tanda kamu rajin belajar literasi keuangan!"
+    },
+    {
+      "id": "hat-crown",
+      "name": "Mahkota Sultan Cuan",
+      "type": "hat",
+      "price": 250,
+      "icon": "👑",
+      "description": "Mahkota berkilau untuk penabung disiplin."
+    },
+    {
+      "id": "hat-headset",
+      "name": "Cyber Headphone RGB",
+      "type": "hat",
+      "price": 150,
+      "icon": "🎧",
+      "description": "Headset futuristik sambil memantau aset."
+    },
+    {
+      "id": "hat-flower",
+      "name": "Bunga Sakura Kawaii",
+      "type": "hat",
+      "price": 80,
+      "icon": "🌸",
+      "description": "Hiasan bunga manis bikin karakter makin gemas."
+    },
+    {
+      "id": "clothes-hoodie",
+      "name": "Cyber Hoodie Neon",
+      "type": "clothes",
+      "price": 120,
+      "icon": "🦺",
+      "description": "Hoodie warna lime favorit Gen Z.",
+      "color": "#84cc16"
+    },
+    {
+      "id": "clothes-suit",
+      "name": "Jas CEO Muda",
+      "type": "clothes",
+      "price": 220,
+      "icon": "👔",
+      "description": "Jas rapi ala pengusaha muda sukses.",
+      "color": "#3b82f6"
+    },
+    {
+      "id": "clothes-cape",
+      "name": "Jubah Pahlawan Emas",
+      "type": "clothes",
+      "price": 300,
+      "icon": "🥋",
+      "description": "Jubah berkibar tanda pembasmi boncos.",
+      "color": "#f59e0b"
+    },
+    {
+      "id": "clothes-tee",
+      "name": "Kaos Santai Anti-FOMO",
+      "type": "clothes",
+      "price": 60,
+      "icon": "👕",
+      "description": "Kaos santai buat nongkrong hemat.",
+      "color": "#ec4899"
+    },
+    {
+      "id": "acc-coin",
+      "name": "Koin Emas Melayang",
+      "type": "accessory",
+      "price": 120,
+      "icon": "🪙",
+      "description": "Koin emas keberuntungan melayang di sampingmu."
+    },
+    {
+      "id": "acc-shield",
+      "name": "Perisai Anti-Pinjol",
+      "type": "accessory",
+      "price": 180,
+      "icon": "🛡️",
+      "description": "Perisai pelindung dari godaan utang konsumtif."
+    },
+    {
+      "id": "acc-coffee",
+      "name": "Iced Matcha Latte",
+      "type": "accessory",
+      "price": 90,
+      "icon": "🍵",
+      "description": "Minuman favorit pelepas dahaga saat belajar."
+    }
+  ]
+}

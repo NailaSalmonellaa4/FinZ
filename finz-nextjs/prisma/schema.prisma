@@ -1,0 +1,203 @@
+// Prisma Schema untuk FinZ — Gamified Micro-Investing & Budgeting
+// Referensi: ARCHITECTURE.md Section 3 (Data Models / Database Schema)
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// ─── Enums ─────────────────────────────────────────────────
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+enum SavingsStatus {
+  ACTIVE
+  COMPLETED
+}
+
+enum InvestmentTradeType {
+  BUY
+  SELL
+}
+
+enum MissionType {
+  RECORD_TRANSACTION
+  CREATE_BUDGET
+  CREATE_SAVINGS
+  SIMULATE_INVESTMENT
+}
+
+// ─── 1. Tabel Pengguna ────────────────────────────────────
+// Menyimpan Kredensial, Level, XP, dan Saldo Virtual
+
+model User {
+  id             String   @id @default(uuid())
+  name           String
+  email          String   @unique
+  passwordHash   String   @map("password_hash")
+  level          Int      @default(1)
+  xp             Int      @default(0)
+  virtualBalance BigInt   @default(10000000) @map("virtual_balance") // Default Rp 10.000.000
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  transactions      Transaction[]
+  budgets           Budget[]
+  savingsGoals      SavingsGoal[]
+  portfolios        Portfolio[]
+  investmentHistory InvestmentHistory[]
+  userMissions      UserMission[]
+
+  @@map("users")
+}
+
+// ─── 2. Tabel Pencatatan Pemasukan & Pengeluaran ──────────
+
+model Transaction {
+  id              String          @id @default(uuid())
+  userId          String          @map("user_id")
+  type            TransactionType
+  category        String          // Contoh: Makanan, Transportasi, Hiburan, Belajar, Uang Saku
+  amount          BigInt          // Dalam Rupiah penuh (> 0)
+  description     String
+  transactionDate DateTime        @map("transaction_date")
+  createdAt       DateTime        @default(now()) @map("created_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, transactionDate])
+  @@map("transactions")
+}
+
+// ─── 3. Tabel Anggaran Bulanan (Budgeting) ────────────────
+
+model Budget {
+  id          String   @id @default(uuid())
+  userId      String   @map("user_id")
+  category    String
+  limitAmount BigInt   @map("limit_amount")
+  month       Int      // 1 - 12
+  year        Int      // Contoh: 2026
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, category, month, year])
+  @@map("budgets")
+}
+
+// ─── 4. Tabel Target Tabungan (Savings Goals) ─────────────
+
+model SavingsGoal {
+  id            String        @id @default(uuid())
+  userId        String        @map("user_id")
+  title         String
+  targetAmount  BigInt        @map("target_amount")
+  currentAmount BigInt        @default(0) @map("current_amount")
+  targetDate    DateTime?     @map("target_date")
+  status        SavingsStatus @default(ACTIVE)
+  createdAt     DateTime      @default(now()) @map("created_at")
+  updatedAt     DateTime      @updatedAt @map("updated_at")
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@map("savings_goals")
+}
+
+// ─── 5. Tabel Master Aset Simulasi Investasi ──────────────
+// Harga Contoh untuk Edukasi
+
+model VirtualAsset {
+  id           String   @id @default(uuid())
+  code         String   @unique // Contoh: RDPU-EDU, SAHAM-EDU, EMAS-EDU
+  name         String   // Contoh: Reksa Dana Pasar Uang Edukasi
+  category     String   // Reksa Dana, Saham Edukasi, Emas Virtual
+  riskProfile  String   @map("risk_profile") // Rendah, Sedang, Tinggi
+  currentPrice BigInt   @map("current_price") // Harga contoh per unit dalam Rupiah
+  description  String
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  portfolios        Portfolio[]
+  investmentHistory InvestmentHistory[]
+
+  @@map("virtual_assets")
+}
+
+// ─── 6. Tabel Portofolio Simulasi Pengguna ────────────────
+
+model Portfolio {
+  id              String       @id @default(uuid())
+  userId          String       @map("user_id")
+  assetId         String       @map("asset_id")
+  units           Decimal      @db.Decimal(18, 4) // Mendukung pecahan unit
+  averageBuyPrice BigInt       @map("average_buy_price")
+  updatedAt       DateTime     @updatedAt @map("updated_at")
+
+  user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  asset VirtualAsset @relation(fields: [assetId], references: [id], onDelete: Restrict)
+
+  @@unique([userId, assetId])
+  @@map("portfolios")
+}
+
+// ─── 7. Tabel Riwayat Transaksi Simulasi Investasi ────────
+
+model InvestmentHistory {
+  id           String              @id @default(uuid())
+  userId       String              @map("user_id")
+  assetId      String              @map("asset_id")
+  tradeType    InvestmentTradeType @map("trade_type") // BUY atau SELL
+  units        Decimal             @db.Decimal(18, 4)
+  pricePerUnit BigInt              @map("price_per_unit")
+  totalAmount  BigInt              @map("total_amount")
+  balanceAfter BigInt              @map("balance_after") // Saldo virtual setelah transaksi
+  createdAt    DateTime            @default(now()) @map("created_at")
+
+  user  User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  asset VirtualAsset @relation(fields: [assetId], references: [id], onDelete: Restrict)
+
+  @@index([userId, createdAt])
+  @@map("investment_history")
+}
+
+// ─── 8. Tabel Master Misi Gamifikasi ──────────────────────
+
+model Mission {
+  id          String      @id @default(uuid())
+  title       String
+  description String
+  missionType MissionType @map("mission_type")
+  targetCount Int         @map("target_count") // Jumlah aksi yang harus dicapai
+  xpReward    Int         @map("xp_reward")
+  createdAt   DateTime    @default(now()) @map("created_at")
+
+  userMissions UserMission[]
+
+  @@map("missions")
+}
+
+// ─── 9. Tabel Progres Misi Pengguna ───────────────────────
+
+model UserMission {
+  id           String    @id @default(uuid())
+  userId       String    @map("user_id")
+  missionId    String    @map("mission_id")
+  currentCount Int       @default(0) @map("current_count")
+  isCompleted  Boolean   @default(false) @map("is_completed")
+  completedAt  DateTime? @map("completed_at")
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  mission Mission @relation(fields: [missionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, missionId])
+  @@map("user_missions")
+}
