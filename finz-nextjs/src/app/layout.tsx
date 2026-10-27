@@ -13,9 +13,9 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "FinZ Quest RPG — Gamified Micro-Investing & Budgeting",
+  title: "FinZ — Platform Edukasi Finansial & Micro-Investing",
   description:
-    "Petualangan edukasi literasi keuangan, budgeting, target tabungan, dan simulasi investasi virtual berbasis gamifikasi RPG.",
+    "Platform edukasi literasi keuangan, budgeting 50/30/20, target tabungan, dan simulasi investasi virtual tanpa risiko uang asli untuk Gen Z.",
 };
 
 export default function RootLayout({

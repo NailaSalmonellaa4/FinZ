@@ -34,16 +34,16 @@ export function LevelUpModal({ isOpen, onClose, newLevel }: LevelUpModalProps) {
         </div>
 
         <div className="mt-5">
-          <div className="inline-flex items-center gap-1.5 rounded-full bg-amber-100 px-3 py-1 text-xs font-bold text-amber-900 border border-amber-300">
-            <Sparkles className="h-3.5 w-3.5 text-amber-600" />
-            LEVEL UP!
+          <div className="inline-flex items-center gap-1.5 rounded-full bg-emerald-100 px-3 py-1 text-xs font-bold text-emerald-900 border border-emerald-300">
+            <Sparkles className="h-3.5 w-3.5 text-emerald-600" />
+            PENCAPAIAN BARU!
           </div>
 
           <h3 className="mt-2 text-2xl font-black tracking-tight text-slate-900">
-            Selamat, Kamu Naik ke
+            Selamat, Kamu Mencapai
           </h3>
 
-          <div className="mt-2 text-4xl font-black bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
+          <div className="mt-2 text-4xl font-black bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 bg-clip-text text-transparent">
             Level {newLevel}
           </div>
 
@@ -56,10 +56,10 @@ export function LevelUpModal({ isOpen, onClose, newLevel }: LevelUpModalProps) {
         <div className="mt-6">
           <Button
             onClick={onClose}
-            className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-black shadow-lg shadow-amber-500/25"
+            className="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold shadow-lg shadow-emerald-500/25"
             leftIcon={<Award className="h-4 w-4" />}
           >
-            Lanjutkan Petualangan!
+            Lanjutkan Pengelolaan Keuangan
           </Button>
         </div>
       </div>

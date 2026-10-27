@@ -1,5 +1,5 @@
-// src/app/page.tsx — Halaman Depan Landing Page FinZ Quest: RPG Edition
-// Edukasi Literasi Finansial & Simulasi Investasi Mikro Berbasis Gamifikasi
+// src/app/page.tsx — Halaman Depan Landing Page FinZ
+// Edukasi Literasi Finansial, Budgeting 50/30/20 & Simulasi Investasi Mikro Virtual
 
 import Link from "next/link";
 import { cookies } from "next/headers";
@@ -8,28 +8,27 @@ import { AUTH_COOKIE_NAME } from "@/server/utils/auth-session";
 import { SimulationDisclaimer } from "@/components/layout/SimulationDisclaimer";
 import {
   Zap,
-  Swords,
   Coins,
   ShieldCheck,
   TrendingUp,
   Target,
-  Trophy,
+  Award,
   Sparkles,
   ArrowRight,
   CheckCircle2,
   Receipt,
   BookOpen,
-  Award,
-  Flame,
-  Shield,
+  PieChart,
   Activity,
   Compass,
   Laptop,
   Check,
+  Wallet,
+  Shield,
 } from "lucide-react";
 
 export default async function HomePage() {
-  // Cek apakah petualang sudah login di browser ini
+  // Cek apakah pengguna sudah login di browser ini
   const cookieStore = await cookies();
   const token = cookieStore.get(AUTH_COOKIE_NAME)?.value;
   const user = token ? await verifyToken(token) : null;
@@ -41,7 +40,7 @@ export default async function HomePage() {
       {/* ========================================================================= */}
       <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/90 backdrop-blur-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3.5 sm:px-6 lg:px-8">
-          {/* Logo & Quest Badge */}
+          {/* Logo & Platform Badge */}
           <Link href="/" className="group flex items-center gap-3">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-tr from-emerald-600 to-indigo-600 text-white shadow-md shadow-emerald-600/20 transition group-hover:scale-105">
               <Zap className="h-5 w-5" />
@@ -52,11 +51,11 @@ export default async function HomePage() {
                   Fin<span className="text-emerald-600">Z</span>
                 </span>
                 <span className="rounded-full border border-emerald-200 bg-emerald-50 px-2 py-0.5 text-[10px] font-bold text-emerald-800 uppercase tracking-wider">
-                  RPG Edition
+                  Literasi Finansial
                 </span>
               </div>
               <span className="text-[10px] text-slate-500 font-medium hidden sm:inline">
-                Gamified Micro-Investing & Budgeting
+                Smart Budgeting &amp; Virtual Investing
               </span>
             </div>
           </Link>
@@ -64,19 +63,19 @@ export default async function HomePage() {
           {/* Quick Nav Anchors */}
           <nav className="hidden md:flex items-center gap-6 text-xs font-semibold text-slate-600">
             <a href="#fitur" className="transition hover:text-emerald-700">
-              Fitur Quest
+              Fitur Utama
             </a>
             <a href="#investasi" className="transition hover:text-emerald-700">
-              Arena Investasi
+              Simulasi Investasi
             </a>
             <a href="#tabungan" className="transition hover:text-emerald-700">
-              Boss Tabungan
+              Target Tabungan
             </a>
             <a href="#alur" className="transition hover:text-emerald-700">
-              Alur Petualangan
+              Cara Kerja
             </a>
             <a href="#edukasi" className="transition hover:text-emerald-700">
-              Panduan Guild
+              Panduan Finansial
             </a>
             <a href="#disclaimer" className="transition hover:text-amber-700">
               Disclaimer
@@ -90,7 +89,7 @@ export default async function HomePage() {
                 href="/dashboard"
                 className="flex items-center gap-2 rounded-xl bg-emerald-600 px-4 py-2 text-xs sm:text-sm font-bold text-white shadow-sm shadow-emerald-600/25 transition hover:bg-emerald-700"
               >
-                <span>Dashboard Guild</span>
+                <span>Buka Dashboard</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             ) : (
@@ -105,8 +104,8 @@ export default async function HomePage() {
                   href="/register"
                   className="flex items-center gap-1.5 rounded-xl bg-emerald-600 px-4 py-2 text-xs sm:text-sm font-bold text-white shadow-sm shadow-emerald-600/25 transition hover:bg-emerald-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
                 >
-                  <Swords className="h-4 w-4" />
-                  <span>Mulai Petualangan</span>
+                  <Wallet className="h-4 w-4" />
+                  <span>Daftar Gratis</span>
                 </Link>
               </>
             )}
@@ -125,27 +124,26 @@ export default async function HomePage() {
         </div>
 
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
-          {/* RPG Badge */}
+          {/* Badge */}
           <div className="inline-flex items-center gap-2 rounded-full border border-emerald-300 bg-emerald-50/90 px-4 py-1.5 text-xs font-bold text-emerald-900 shadow-xs">
             <Sparkles className="h-4 w-4 text-emerald-600" />
-            <span>Platform Gamifikasi Finansial Gen Z Pertama di Indonesia</span>
+            <span>Platform Edukasi Finansial &amp; Investasi Mikro Virtual untuk Gen Z</span>
           </div>
 
           {/* Headline */}
           <h1 className="mx-auto mt-6 max-w-4xl font-headline text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl lg:text-6xl">
-            Taklukkan Boncos, Kuasai Finansial dalam{" "}
+            Kendalikan Keuangan, Bangun Kebiasaan Finansial{" "}
             <span className="bg-gradient-to-r from-emerald-600 via-teal-600 to-indigo-600 bg-clip-text text-transparent">
-              Petualangan RPG Nyata
+              Sehat Sejak Dini
             </span>
           </h1>
 
           {/* Subtitle */}
           <p className="mx-auto mt-6 max-w-2xl text-base text-slate-600 sm:text-lg lg:text-xl leading-relaxed">
-            Kelola uang saku dan gaji magang dengan cara seru! Aktifkan tameng
-            anggaran 50/30/20, taklukkan Boss Tabungan impian, dan uji insting
-            investasi di Arena Virtual bermodal{" "}
+            Kelola uang saku dan gaji magang dengan cerdas. Atur batas anggaran 50/30/20,
+            capai target tabungan impian, dan uji insting portofolio di simulator investasi dengan modal edukasi{" "}
             <strong className="text-slate-900 font-bold">Rp 10.000.000 virtual</strong>{" "}
-            tanpa takut rugi uang asli.
+            tanpa risiko uang asli.
           </p>
 
           {/* Call to Actions */}
@@ -154,8 +152,8 @@ export default async function HomePage() {
               href={user ? "/dashboard" : "/register"}
               className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-emerald-600 to-emerald-700 px-8 py-4 text-base font-bold text-white shadow-lg shadow-emerald-600/30 transition hover:from-emerald-700 hover:to-emerald-800 hover:shadow-xl focus:outline-none"
             >
-              <Swords className="h-5 w-5" />
-              <span>{user ? "Buka Dashboard Guild" : "Mulai Petualangan Gratis"}</span>
+              <Wallet className="h-5 w-5" />
+              <span>{user ? "Buka Dashboard" : "Mulai Sekarang Gratis"}</span>
               <ArrowRight className="h-5 w-5" />
             </Link>
 
@@ -163,15 +161,15 @@ export default async function HomePage() {
               href="#fitur"
               className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-2xl border border-slate-300 bg-white px-7 py-4 text-base font-bold text-slate-700 shadow-xs transition hover:bg-slate-50 hover:text-slate-900"
             >
-              <Compass className="h-5 w-5 text-indigo-600" />
-              <span>Pelajari Fitur Quest</span>
+              <Compass className="h-5 w-5 text-emerald-600" />
+              <span>Pelajari Fitur FinZ</span>
             </a>
           </div>
 
           {/* Mini Trust Highlights */}
           <div className="mt-10 flex flex-wrap items-center justify-center gap-6 sm:gap-10 text-xs sm:text-sm font-semibold text-slate-600">
             <div className="flex items-center gap-2">
-              <Coins className="h-5 w-5 text-amber-500" />
+              <Coins className="h-5 w-5 text-emerald-600" />
               <span>Rp 10 Juta Saldo Virtual Gratis</span>
             </div>
             <div className="flex items-center gap-2">
@@ -179,60 +177,60 @@ export default async function HomePage() {
               <span>100% Zero-Risk Edukasi</span>
             </div>
             <div className="flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-indigo-600" />
-              <span>Level, EXP & Reward Misi</span>
+              <Award className="h-5 w-5 text-indigo-600" />
+              <span>Panduan Literasi Keuangan Praktis</span>
             </div>
           </div>
 
           {/* ========================================================================= */}
-          {/* HERO VISUAL MOCKUP — FINZ GUILD COMMAND CENTER PREVIEW                     */}
+          {/* HERO VISUAL MOCKUP — DASHBOARD PREVIEW                                   */}
           {/* ========================================================================= */}
           <div className="mt-14 mx-auto max-w-5xl rounded-3xl border border-slate-200/90 bg-white p-3 sm:p-5 shadow-2xl shadow-slate-300/40">
             {/* Top Mockup Header Bar */}
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl bg-gradient-to-r from-slate-900 to-slate-800 px-5 py-3.5 text-white">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-3 rounded-2xl bg-slate-900 px-5 py-3.5 text-white">
               <div className="flex items-center gap-3">
                 <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                  <Flame className="h-5 w-5" />
+                  <Activity className="h-5 w-5" />
                 </div>
                 <div className="text-left">
                   <div className="flex items-center gap-2">
                     <span className="text-xs font-bold uppercase tracking-wider text-slate-300">
-                      Guild Command Center
+                      Pratinjau Dashboard FinZ
                     </span>
-                    <span className="rounded-full bg-amber-400/20 px-2 py-0.5 text-[10px] font-bold text-amber-300 border border-amber-400/30">
-                      Level 3 • Apprentice
+                    <span className="rounded-full bg-emerald-400/20 px-2 py-0.5 text-[10px] font-bold text-emerald-300 border border-emerald-400/30">
+                      Tingkat Edukasi • Level 3
                     </span>
                   </div>
                   <p className="text-xs text-slate-400">
-                    Petualang Aktif • 7 Hari Berturut-turut (Streak Aktif)
+                    Pengguna Aktif • Rutin 7 Hari Terakhir
                   </p>
                 </div>
               </div>
 
-              {/* Mini XP Bar */}
+              {/* Mini Progress Bar */}
               <div className="flex items-center gap-3 w-full sm:w-auto">
                 <div className="w-full sm:w-44 text-right">
                   <div className="flex justify-between text-[11px] font-bold mb-1">
-                    <span className="text-amber-400">Progress Level</span>
-                    <span>180 / 300 XP</span>
+                    <span className="text-emerald-400">Progres Level</span>
+                    <span>180 / 300 Poin</span>
                   </div>
                   <div className="h-2 w-full rounded-full bg-slate-700 overflow-hidden">
-                    <div className="h-full w-[60%] rounded-full bg-gradient-to-r from-amber-400 to-amber-500" />
+                    <div className="h-full w-[60%] rounded-full bg-gradient-to-r from-emerald-400 to-teal-400" />
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* 4 HUD Stat Cards in Mockup */}
+            {/* 4 Stat Cards in Mockup */}
             <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-left">
               {/* Stat 1: Saldo Kas Riil */}
               <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                    Pundi Kas Riil
+                    Saldo Kas Riil
                   </span>
                   <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700">
-                    <Coins className="h-4 w-4" />
+                    <Wallet className="h-4 w-4" />
                   </div>
                 </div>
                 <p className="mt-2 text-xl font-extrabold text-slate-900">
@@ -243,7 +241,7 @@ export default async function HomePage() {
                 </p>
               </div>
 
-              {/* Stat 2: Arena Investasi Virtual */}
+              {/* Stat 2: Portofolio Investasi Virtual */}
               <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
@@ -261,29 +259,29 @@ export default async function HomePage() {
                 </p>
               </div>
 
-              {/* Stat 3: Tameng Anggaran */}
+              {/* Stat 3: Batas Anggaran */}
               <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                    Tameng Anggaran
+                    Batas Anggaran
                   </span>
                   <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-emerald-100 text-emerald-700">
                     <ShieldCheck className="h-4 w-4" />
                   </div>
                 </div>
                 <p className="mt-2 text-xl font-extrabold text-slate-900">
-                  Status: KOKOH
+                  Status: AMAN
                 </p>
                 <p className="mt-1 text-[11px] font-medium text-slate-600">
-                  Terpakai 56.8% dari limit aman
+                  Terpakai 56.8% dari limit bulanan
                 </p>
               </div>
 
-              {/* Stat 4: Boss Tabungan */}
+              {/* Stat 4: Target Tabungan */}
               <div className="rounded-2xl border border-slate-200 bg-slate-50/70 p-4">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-slate-500 uppercase tracking-wider">
-                    Boss Tabungan
+                    Target Tabungan
                   </span>
                   <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-amber-100 text-amber-700">
                     <Target className="h-4 w-4" />
@@ -300,13 +298,13 @@ export default async function HomePage() {
 
             {/* Mockup Dual Columns */}
             <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-3 text-left">
-              {/* Left Column: Misi Aktif Guild */}
+              {/* Left Column: Aktivitas Finansial Harian */}
               <div className="rounded-2xl border border-slate-200 bg-white p-4">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                   <div className="flex items-center gap-2">
-                    <Swords className="h-4 w-4 text-emerald-600" />
+                    <CheckCircle2 className="h-4 w-4 text-emerald-600" />
                     <span className="text-xs font-bold text-slate-900 uppercase">
-                      Misi Harian Guild
+                      Target Finansial Harian
                     </span>
                   </div>
                   <span className="text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-full">
@@ -323,8 +321,8 @@ export default async function HomePage() {
                         Catat Pengeluaran Makan Siang
                       </span>
                     </div>
-                    <span className="font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md text-[10px]">
-                      +10 XP
+                    <span className="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md text-[10px]">
+                      +10 Poin
                     </span>
                   </div>
                   <div className="flex items-center justify-between rounded-xl bg-slate-50 p-2.5 text-xs">
@@ -333,36 +331,36 @@ export default async function HomePage() {
                         <Check className="h-3.5 w-3.5" />
                       </div>
                       <span className="font-semibold text-slate-800">
-                        Klaim Peti Harian Guild
+                        Check-in Edukasi Harian
                       </span>
                     </div>
-                    <span className="font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md text-[10px]">
-                      +15 XP
+                    <span className="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md text-[10px]">
+                      +15 Poin
                     </span>
                   </div>
                   <div className="flex items-center justify-between rounded-xl border border-dashed border-emerald-300 bg-emerald-50/50 p-2.5 text-xs">
                     <div className="flex items-center gap-2.5">
-                      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-emerald-600 text-white animate-pulse">
+                      <div className="flex h-6 w-6 items-center justify-center rounded-md bg-emerald-600 text-white">
                         <Activity className="h-3.5 w-3.5" />
                       </div>
                       <span className="font-bold text-emerald-950">
-                        Coba Beli 1 Reksa Dana Virtual
+                        Coba Simulasi Beli 1 Reksa Dana
                       </span>
                     </div>
                     <span className="font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded-md text-[10px]">
-                      +20 XP
+                      +20 Poin
                     </span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: Mini Jurus 50/30/20 */}
+              {/* Right Column: Alokasi 50/30/20 */}
               <div className="rounded-2xl border border-slate-200 bg-white p-4">
                 <div className="flex items-center justify-between border-b border-slate-100 pb-2.5">
                   <div className="flex items-center gap-2">
-                    <Shield className="h-4 w-4 text-indigo-600" />
+                    <PieChart className="h-4 w-4 text-indigo-600" />
                     <span className="text-xs font-bold text-slate-900 uppercase">
-                      Alokasi Benteng 50/30/20
+                      Formula Alokasi 50/30/20
                     </span>
                   </div>
                   <span className="text-[11px] font-semibold text-indigo-700 bg-indigo-50 px-2 py-0.5 rounded-full">
@@ -390,7 +388,7 @@ export default async function HomePage() {
                   </div>
                   <div>
                     <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                      <span>20% Tabungan & Investasi</span>
+                      <span>20% Tabungan &amp; Investasi</span>
                       <span className="text-amber-700">Tercapai (26%)</span>
                     </div>
                     <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
@@ -405,7 +403,7 @@ export default async function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 3. SIMULATION DISCLAIMER BANNER (AGENTS.md MANDATORY)                    */}
+      {/* 3. SIMULATION DISCLAIMER BANNER                                          */}
       {/* ========================================================================= */}
       <section id="disclaimer" className="border-y border-amber-200/80 bg-amber-50/70 py-5 px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl">
@@ -414,7 +412,7 @@ export default async function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 4. FOUR QUEST PILLARS (CORE FEATURES)                                    */}
+      {/* 4. FOUR CORE FEATURES                                                    */}
       {/* ========================================================================= */}
       <section id="fitur" className="py-20 sm:py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -423,11 +421,11 @@ export default async function HomePage() {
               Empat Pilar Utama
             </span>
             <h2 className="mt-4 font-headline text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-              Senjata Finansial Lengkap untuk Taklukkan Boncos
+              Fitur Lengkap Pengelolaan Keuangan Cerdas
             </h2>
             <p className="mt-3 text-base sm:text-lg text-slate-600">
               Dibangun dari fondasi literasi keuangan modern yang disederhanakan
-              ke dalam mekanik permainan interaktif.
+              untuk membantu Gen Z mengelola uang dengan disiplin dan terarah.
             </p>
           </div>
 
@@ -442,50 +440,50 @@ export default async function HomePage() {
                   Pencatatan Arus Kas Cepat
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                  Catat setiap pemasukan uang jajan, gaji magang, atau belanja kopi
+                  Catat setiap pemasukan uang jajan, gaji magang, atau belanja harian
                   dalam 3 detik. Kategori otomatis membedakan kebutuhan vs keinginan.
                 </p>
               </div>
               <div className="mt-6 border-t border-slate-200/80 pt-4">
                 <span className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-700">
-                  <CheckCircle2 className="h-4 w-4" /> +10 XP Setiap Transaksi
+                  <CheckCircle2 className="h-4 w-4" /> Kategori Otomatis &amp; Real-time
                 </span>
               </div>
             </div>
 
-            {/* Pillar 2: Fortifikasi Anggaran */}
+            {/* Pillar 2: Batas Anggaran 50/30/20 */}
             <div className="rounded-3xl border border-slate-200 bg-slate-50/60 p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-indigo-300 hover:bg-white flex flex-col justify-between">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-indigo-100 text-indigo-700 shadow-sm">
                   <ShieldCheck className="h-6 w-6" />
                 </div>
                 <h3 className="mt-5 text-lg font-bold text-slate-900">
-                  Tameng Anggaran 50/30/20
+                  Kontrol Anggaran 50/30/20
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                  Pasang limit pengeluaran bulanan. Status tameng real-time
-                  (Kokoh, Waspada, Kritis) langsung memperingatkanmu sebelum overbudget.
+                  Pasang limit pengeluaran bulanan. Status anggaran real-time
+                  (Aman, Waspada, Overbudget) langsung memperingatkanmu sebelum dana habis.
                 </p>
               </div>
               <div className="mt-6 border-t border-slate-200/80 pt-4">
                 <span className="inline-flex items-center gap-1.5 text-xs font-bold text-indigo-700">
-                  <CheckCircle2 className="h-4 w-4" /> Anti-Boncos Alert
+                  <CheckCircle2 className="h-4 w-4" /> Peringatan Batas Pengeluaran
                 </span>
               </div>
             </div>
 
-            {/* Pillar 3: Arena Investasi Mikro Virtual */}
+            {/* Pillar 3: Simulasi Investasi Mikro Virtual */}
             <div className="rounded-3xl border border-slate-200 bg-slate-50/60 p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-violet-300 hover:bg-white flex flex-col justify-between">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-violet-100 text-violet-700 shadow-sm">
                   <TrendingUp className="h-6 w-6" />
                 </div>
                 <h3 className="mt-5 text-lg font-bold text-slate-900">
-                  Arena Investasi Virtual
+                  Simulasi Investasi Mikro Virtual
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">
                   Eksplorasi Reksa Dana, Obligasi Negara, Emas Digital, dan Saham
-                  menggunakan modal simulasi Rp 10 Juta tanpa risiko modal riil.
+                  menggunakan modal simulasi Rp 10 Juta tanpa risiko kehilangan uang asli.
                 </p>
               </div>
               <div className="mt-6 border-t border-slate-200/80 pt-4">
@@ -495,23 +493,23 @@ export default async function HomePage() {
               </div>
             </div>
 
-            {/* Pillar 4: Boss Quest & Tabungan Impian */}
+            {/* Pillar 4: Target Tabungan Terencana */}
             <div className="rounded-3xl border border-slate-200 bg-slate-50/60 p-6 transition duration-200 hover:-translate-y-1 hover:shadow-lg hover:border-amber-300 hover:bg-white flex flex-col justify-between">
               <div>
                 <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 shadow-sm">
                   <Target className="h-6 w-6" />
                 </div>
                 <h3 className="mt-5 text-lg font-bold text-slate-900">
-                  Boss Quest Tabungan
+                  Target Tabungan Terencana
                 </h3>
                 <p className="mt-2 text-sm text-slate-600 leading-relaxed">
-                  Ubah target menabung laptop baru atau dana darurat menjadi
-                  pertarungan boss RPG. Setor tabungan untuk mengikis HP Boss hingga kalah!
+                  Tentukan target menabung laptop baru, dana darurat, atau biaya sertifikasi.
+                  Pantau persentase pencapaian secara visual hingga target tuntas 100%.
                 </p>
               </div>
               <div className="mt-6 border-t border-slate-200/80 pt-4">
                 <span className="inline-flex items-center gap-1.5 text-xs font-bold text-amber-700">
-                  <CheckCircle2 className="h-4 w-4" /> Visual HP Bar & Bonus EXP
+                  <CheckCircle2 className="h-4 w-4" /> Visual Progress Bar
                 </span>
               </div>
             </div>
@@ -520,7 +518,7 @@ export default async function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 5. ARENA INVESTASI DEEP DIVE (RP 10 JUTA VIRTUAL SIMULATOR)              */}
+      {/* 5. SIMULASI INVESTASI DEEP DIVE                                           */}
       {/* ========================================================================= */}
       <section id="investasi" className="py-20 sm:py-24 bg-slate-50 border-t border-slate-200/70">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -534,9 +532,9 @@ export default async function HomePage() {
                 Latihan Sebelum Terjun ke Pasar Modal Nyata
               </h2>
               <p className="mt-4 text-base text-slate-600 leading-relaxed">
-                Banyak pemula terjebak FOMO atau takut memulai karena takut rugi.
-                Di FinZ Arena, kamu belajar psikologi pasar, diversifikasi aset,
-                dan membaca grafik portofolio secara aman.
+                Banyak pemula ragu memulai karena takut rugi atau minim literasi.
+                Di FinZ Simulator, Anda belajar psikologi pasar, diversifikasi aset,
+                dan membaca grafik pergerakan portofolio secara aman.
               </p>
 
               <div className="mt-6 space-y-3.5">
@@ -560,10 +558,10 @@ export default async function HomePage() {
                   </div>
                   <div>
                     <h4 className="text-sm font-bold text-slate-900">
-                      Bebas Coba Jual / Beli Kapan Saja
+                      Bebas Simulasi Jual &amp; Beli Kapan Saja
                     </h4>
                     <p className="text-xs text-slate-600">
-                      Eksplorasi strategi akumulasi berkala (DCA) atau swing trading virtual tanpa konsekuensi utang.
+                      Pelajari strategi investasi berkala (DCA) atau akumulasi portofolio tanpa konsekuensi finansial riil.
                     </p>
                   </div>
                 </div>
@@ -589,7 +587,7 @@ export default async function HomePage() {
                   className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-6 py-3 text-sm font-bold text-white shadow-sm shadow-indigo-600/30 transition hover:bg-indigo-700"
                 >
                   <Coins className="h-4 w-4" />
-                  <span>Klaim Saldo Virtual Sekarang</span>
+                  <span>Coba Simulasi Investasi Sekarang</span>
                 </Link>
               </div>
             </div>
@@ -610,7 +608,7 @@ export default async function HomePage() {
                   Reksa Dana Pasar Uang
                 </h4>
                 <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                  Instrumen paling stabil untuk belajar memarkir dana darurat virtual agar tidak tergerus inflasi.
+                  Instrumen paling stabil untuk belajar memarkir dana darurat virtual agar nilainya terlindungi.
                 </p>
                 <div className="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
                   <span className="text-slate-500">Volatilitas:</span>
@@ -632,7 +630,7 @@ export default async function HomePage() {
                   Obligasi Negara FinZ Bond
                 </h4>
                 <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                  Simulasi surat utang negara dengan kupon berkala untuk memahami konsep pendapatan pasif tetap.
+                  Simulasi surat utang negara dengan kupon berkala untuk memahami konsep pendapatan tetap.
                 </p>
                 <div className="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
                   <span className="text-slate-500">Volatilitas:</span>
@@ -676,11 +674,11 @@ export default async function HomePage() {
                   Saham Indeks FinZ Top 30
                 </h4>
                 <p className="mt-1 text-xs text-slate-600 leading-relaxed">
-                  Keranjang saham perusahaan unggulan untuk belajar dinamika pasar modal dan psikologi fluktuasi harga.
+                  Keranjang saham perusahaan unggulan untuk belajar dinamika pasar modal dan fluktuasi harga.
                 </p>
                 <div className="mt-4 pt-3 border-t border-slate-100 flex justify-between items-center text-xs">
                   <span className="text-slate-500">Volatilitas:</span>
-                  <span className="font-bold text-slate-800">Tinggi (High Reward)</span>
+                  <span className="font-bold text-slate-800">Tinggi (High Growth)</span>
                 </div>
               </div>
             </div>
@@ -689,25 +687,25 @@ export default async function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 6. BOSS QUEST & SAVINGS GOALS SHOWCASE                                   */}
+      {/* 6. TARGET TABUNGAN SHOWCASE                                              */}
       {/* ========================================================================= */}
       <section id="tabungan" className="py-20 sm:py-24 bg-white border-t border-slate-200/70">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
-            <span className="rounded-full bg-amber-100 px-3 py-1 text-xs font-extrabold text-amber-800 uppercase tracking-wider">
-              Gamifikasi Target Tabungan
+            <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-extrabold text-emerald-800 uppercase tracking-wider">
+              Manajemen Target Finansial
             </span>
             <h2 className="mt-4 font-headline text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-              Ubah Impian Jadi Boss Monster yang Harus Ditaklukkan
+              Wujudkan Rencana dengan Pemantauan Progres Nyata
             </h2>
             <p className="mt-3 text-base sm:text-lg text-slate-600">
-              Jangan biarkan tabunganmu pasif. Setiap rupiah yang kamu sisihkan
-              langsung mengurangi HP Boss hingga mencapai 100% tuntas!
+              Tetapkan sasaran finansial yang realistis. Setiap setoran tabungan
+              terdata secara otomatis hingga mencapai 100% tuntas.
             </p>
           </div>
 
           <div className="mt-14 grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Boss 1: Dana Darurat */}
+            {/* Target 1: Dana Darurat */}
             <div className="rounded-3xl border border-slate-200 bg-slate-50/50 p-6 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between">
@@ -719,14 +717,14 @@ export default async function HomePage() {
                   </span>
                 </div>
                 <h3 className="mt-4 text-lg font-bold text-slate-900">
-                  Boss Tameng Darurat
+                  Dana Darurat Mandiri
                 </h3>
                 <p className="mt-1 text-xs text-slate-600">
                   Target: Rp 3.000.000 (3x pengeluaran bulanan)
                 </p>
                 <div className="mt-4">
                   <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                    <span>HP Tersisa: 15%</span>
+                    <span>Sisa: 15%</span>
                     <span className="text-emerald-700">Rp 2.550.000 (85%)</span>
                   </div>
                   <div className="h-2.5 w-full rounded-full bg-slate-200 overflow-hidden">
@@ -735,30 +733,30 @@ export default async function HomePage() {
                 </div>
               </div>
               <div className="mt-6 pt-4 border-t border-slate-200 text-xs font-semibold text-slate-600 flex items-center gap-1.5">
-                <Trophy className="h-4 w-4 text-amber-500" /> Reward Takluk: +50 XP
+                <CheckCircle2 className="h-4 w-4 text-emerald-600" /> Pondasi Keamanan Finansial
               </div>
             </div>
 
-            {/* Boss 2: Laptop Belajar SMK */}
-            <div className="rounded-3xl border-2 border-indigo-300 bg-indigo-50/30 p-6 flex flex-col justify-between shadow-md">
+            {/* Target 2: Laptop Belajar */}
+            <div className="rounded-3xl border-2 border-indigo-200 bg-indigo-50/20 p-6 flex flex-col justify-between shadow-xs">
               <div>
                 <div className="flex items-center justify-between">
                   <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-indigo-100 text-indigo-700">
                     <Laptop className="h-5 w-5" />
                   </div>
                   <span className="text-xs font-bold text-indigo-800 bg-indigo-100 px-2.5 py-0.5 rounded-full">
-                    Target Impian
+                    Peralatan Belajar
                   </span>
                 </div>
                 <h3 className="mt-4 text-lg font-bold text-slate-900">
-                  Boss Laptop Coding SMK
+                  Laptop Coding &amp; Desain
                 </h3>
                 <p className="mt-1 text-xs text-slate-600">
                   Target: Rp 6.000.000 untuk upgrade perangkat belajar
                 </p>
                 <div className="mt-4">
                   <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                    <span>HP Tersisa: 30%</span>
+                    <span>Sisa: 30%</span>
                     <span className="text-indigo-700">Rp 4.200.000 (70%)</span>
                   </div>
                   <div className="h-2.5 w-full rounded-full bg-indigo-100 overflow-hidden">
@@ -767,11 +765,11 @@ export default async function HomePage() {
                 </div>
               </div>
               <div className="mt-6 pt-4 border-t border-indigo-200 text-xs font-semibold text-indigo-900 flex items-center gap-1.5">
-                <Trophy className="h-4 w-4 text-amber-500" /> Reward Takluk: +100 XP
+                <CheckCircle2 className="h-4 w-4 text-indigo-600" /> Target Produktivitas
               </div>
             </div>
 
-            {/* Boss 3: Sertifikasi Profesi */}
+            {/* Target 3: Sertifikasi */}
             <div className="rounded-3xl border border-slate-200 bg-slate-50/50 p-6 flex flex-col justify-between">
               <div>
                 <div className="flex items-center justify-between">
@@ -783,14 +781,14 @@ export default async function HomePage() {
                   </span>
                 </div>
                 <h3 className="mt-4 text-lg font-bold text-slate-900">
-                  Boss Sertifikasi Global
+                  Sertifikasi Profesi IT
                 </h3>
                 <p className="mt-1 text-xs text-slate-600">
-                  Target: Rp 1.500.000 untuk ujian kompetensi IT
+                  Target: Rp 1.500.000 untuk ujian kompetensi
                 </p>
                 <div className="mt-4">
                   <div className="flex justify-between text-xs font-bold text-slate-700 mb-1">
-                    <span>HP Tersisa: 60%</span>
+                    <span>Sisa: 60%</span>
                     <span className="text-violet-700">Rp 600.000 (40%)</span>
                   </div>
                   <div className="h-2.5 w-full rounded-full bg-slate-200 overflow-hidden">
@@ -799,7 +797,7 @@ export default async function HomePage() {
                 </div>
               </div>
               <div className="mt-6 pt-4 border-t border-slate-200 text-xs font-semibold text-slate-600 flex items-center gap-1.5">
-                <Trophy className="h-4 w-4 text-amber-500" /> Reward Takluk: +40 XP
+                <CheckCircle2 className="h-4 w-4 text-violet-600" /> Peningkatan Karir
               </div>
             </div>
           </div>
@@ -807,7 +805,7 @@ export default async function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 7. HOW IT WORKS / ALUR PETUALANGAN                                       */}
+      {/* 7. CARA KERJA (ALUR PEMBELAJARAN)                                        */}
       {/* ========================================================================= */}
       <section id="alur" className="py-20 sm:py-24 bg-slate-900 text-white relative overflow-hidden">
         {/* Glow ambient */}
@@ -818,13 +816,13 @@ export default async function HomePage() {
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <span className="rounded-full bg-emerald-500/20 border border-emerald-500/40 px-3 py-1 text-xs font-extrabold text-emerald-300 uppercase tracking-wider">
-              Tiga Langkah Petualang
+              Tiga Langkah Mudah
             </span>
             <h2 className="mt-4 font-headline text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
-              Bagaimana Cara Memulai Quest FinZ?
+              Bagaimana Cara Memulai di FinZ?
             </h2>
             <p className="mt-3 text-base text-slate-300">
-              Tidak perlu pengalaman investasi dan tanpa verifikasi rekening bank yang rumit.
+              Tidak memerlukan kartu kredit dan tanpa verifikasi rekening bank yang rumit.
             </p>
           </div>
 
@@ -835,11 +833,11 @@ export default async function HomePage() {
                 01
               </div>
               <h3 className="mt-6 text-xl font-bold text-white">
-                Daftar & Klaim Rp 10 Juta
+                Daftar &amp; Klaim Saldo Virtual
               </h3>
               <p className="mt-3 text-sm text-slate-300 leading-relaxed">
-                Buat akun petualangmu dalam 30 detik. Sistem otomatis mengisi
-                pundi investasimu dengan saldo virtual Rp 10.000.000 untuk simulasi bebas risiko.
+                Buat akun dalam 30 detik. Sistem otomatis menyediakan saldo virtual
+                sebesar Rp 10.000.000 untuk sarana latihan investasi tanpa risiko uang sungguhan.
               </p>
             </div>
 
@@ -849,25 +847,25 @@ export default async function HomePage() {
                 02
               </div>
               <h3 className="mt-6 text-xl font-bold text-white">
-                Jalankan Misi & Jaga Tameng
+                Catat Transaksi &amp; Atur Batas
               </h3>
               <p className="mt-3 text-sm text-slate-300 leading-relaxed">
-                Catat pengeluaran harianmu, atur limit 50/30/20, buka peti harian,
-                dan coba beli instrumen aset virtual pertamamu untuk mengumpulkan XP.
+                Catat pengeluaran harianmu, terapkan formula anggaran 50/30/20,
+                dan evaluasi portofolio virtual secara konsisten.
               </p>
             </div>
 
             {/* Step 3 */}
             <div className="rounded-3xl border border-slate-800 bg-slate-800/60 p-7 relative">
-              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-500/20 text-amber-400 font-extrabold text-lg border border-amber-500/30">
+              <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-teal-500/20 text-teal-400 font-extrabold text-lg border border-teal-500/30">
                 03
               </div>
               <h3 className="mt-6 text-xl font-bold text-white">
-                Naik Level ke Grand Master
+                Capai Target &amp; Mandiri Finansial
               </h3>
               <p className="mt-3 text-sm text-slate-300 leading-relaxed">
-                Dari Novice Adventurer naik pangkat hingga Grand Master Finansial.
-                Bangun mental mandiri dan kebiasaan finansial sehat seumur hidup.
+                Wujudkan tabungan impian, tingkatkan pemahaman portofolio aset,
+                dan bangun kebiasaan finansial yang sehat seumur hidup.
               </p>
             </div>
           </div>
@@ -877,7 +875,7 @@ export default async function HomePage() {
               href="/register"
               className="inline-flex items-center gap-2 rounded-2xl bg-emerald-500 px-8 py-3.5 text-sm sm:text-base font-bold text-slate-950 shadow-lg shadow-emerald-500/20 transition hover:bg-emerald-400"
             >
-              <span>Bergabung Bersama Guild FinZ Sekarang</span>
+              <span>Daftar Akun FinZ Sekarang</span>
               <ArrowRight className="h-5 w-5" />
             </Link>
           </div>
@@ -885,16 +883,16 @@ export default async function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 8. GUILD TIPS & FINANCIAL KNOWLEDGE HUB                                  */}
+      {/* 8. PANDUAN FINANSIAL (KNOWLEDGE HUB)                                     */}
       {/* ========================================================================= */}
       <section id="edukasi" className="py-20 sm:py-24 bg-white">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto">
             <span className="rounded-full bg-emerald-100 px-3 py-1 text-xs font-extrabold text-emerald-800 uppercase tracking-wider">
-              Perpustakaan Literasi Guild
+              Perpustakaan Literasi
             </span>
             <h2 className="mt-4 font-headline text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
-              3 Jurus Rahasia Finansial Petualang Cerdas
+              3 Prinsip Dasar Pengelolaan Keuangan Cerdas
             </h2>
             <p className="mt-3 text-base sm:text-lg text-slate-600">
               Bukan sekadar mencatat angka, FinZ membimbingmu memahami filosofi
@@ -909,7 +907,7 @@ export default async function HomePage() {
                 <BookOpen className="h-5 w-5" />
               </div>
               <h3 className="mt-4 text-base font-bold text-slate-900">
-                Rumus 50/30/20: Kunci Benteng Anggaran
+                Rumus 50/30/20: Kunci Kontrol Anggaran
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
                 Alokasikan 50% pendapatan untuk Kebutuhan Pokok, 30% untuk Keinginan
@@ -923,11 +921,11 @@ export default async function HomePage() {
                 <Shield className="h-5 w-5" />
               </div>
               <h3 className="mt-4 text-base font-bold text-slate-900">
-                Tameng Darurat: Perlindungan Sebelum Bertarung
+                Dana Darurat: Pondasi Sebelum Berinvestasi
               </h3>
               <p className="mt-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Jangan pernah berinvestasi agresif sebelum memiliki dana darurat
-                sebesar 3 hingga 6 bulan pengeluaran. Ini mencegahmu berutang saat keadaan darurat.
+                Prioritaskan memiliki dana darurat sebesar 3 hingga 6 bulan pengeluaran
+                sebelum mulai berinvestasi secara agresif. Ini mencegah utang saat kondisi mendesak.
               </p>
             </div>
 
@@ -949,7 +947,7 @@ export default async function HomePage() {
       </section>
 
       {/* ========================================================================= */}
-      {/* 9. BOTTOM GUILD RALLY CTA                                                */}
+      {/* 9. BOTTOM CTA                                                            */}
       {/* ========================================================================= */}
       <section className="py-16 sm:py-20 bg-slate-50">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
@@ -959,14 +957,14 @@ export default async function HomePage() {
 
             <div className="relative z-10 max-w-2xl mx-auto">
               <span className="rounded-full bg-emerald-500/20 border border-emerald-400/30 px-3.5 py-1 text-xs font-bold text-emerald-300">
-                Guild Recruitment Terbuka
+                Pendaftaran Terbuka
               </span>
               <h2 className="mt-4 font-headline text-3xl sm:text-4xl font-extrabold tracking-tight text-white">
                 Siap Mengendalikan Masa Depan Finansialmu?
               </h2>
               <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed">
-                Bergabunglah gratis sekarang. Taklukkan boncos, kembangkan modal
-                virtual Rp 10.000.000, dan jadilah pahlawan finansial untuk dirimu sendiri.
+                Bergabunglah gratis sekarang. Kelola arus kas harian, manfaatkan modal
+                edukasi virtual Rp 10.000.000, dan bangun kebiasaan finansial yang mandiri.
               </p>
 
               <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
@@ -974,8 +972,8 @@ export default async function HomePage() {
                   href="/register"
                   className="flex w-full sm:w-auto items-center justify-center gap-2 rounded-xl bg-emerald-500 px-7 py-3.5 text-sm sm:text-base font-bold text-slate-950 shadow-lg shadow-emerald-500/25 transition hover:bg-emerald-400"
                 >
-                  <Swords className="h-5 w-5" />
-                  <span>Daftar Akun Petualang</span>
+                  <Wallet className="h-5 w-5" />
+                  <span>Daftar Akun Sekarang</span>
                 </Link>
                 <Link
                   href="/login"
@@ -1006,7 +1004,7 @@ export default async function HomePage() {
                   Fin<span className="text-emerald-600">Z</span>
                 </span>
                 <span className="text-xs text-slate-500 block">
-                  FinZ Quest: RPG Edition • Literasi Keuangan Interaktif
+                  Platform Edukasi Literasi Finansial &amp; Budgeting
                 </span>
               </div>
             </div>
@@ -1026,20 +1024,20 @@ export default async function HomePage() {
                 Investasi Virtual
               </Link>
               <Link href="/savings" className="transition hover:text-emerald-700">
-                Boss Tabungan
+                Target Tabungan
               </Link>
               <Link href="/missions" className="transition hover:text-emerald-700">
-                Misi & Edukasi
+                Edukasi &amp; Panduan
               </Link>
             </div>
           </div>
 
           <div className="mt-8 border-t border-slate-100 pt-6 text-center text-xs text-slate-500 leading-relaxed">
             <p>
-              © {new Date().getFullYear()} FinZ (Gamified Micro-Investing & Budgeting). Seluruh hak cipta dilindungi undang-undang.
+              © {new Date().getFullYear()} FinZ (Smart Budgeting &amp; Virtual Investing). Seluruh hak cipta dilindungi undang-undang.
             </p>
             <p className="mt-1 text-[11px] text-slate-400">
-              Pemberitahuan: Seluruh saldo investasi, aset portofolio, dan transaksi adalah simulasi edukatif (bukan produk perbankan atau sekuritas berizin).
+              Pemberitahuan: Seluruh saldo investasi, aset portofolio, dan transaksi adalah simulasi edukasi (bukan produk perbankan atau sekuritas berizin).
             </p>
           </div>
         </div>

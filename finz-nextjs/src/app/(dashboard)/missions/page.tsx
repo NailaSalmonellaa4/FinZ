@@ -64,42 +64,42 @@ export default function MissionsPage() {
       {/* Header Halaman */}
       <div>
         <h1 className="text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
-          Misi Gamifikasi & Literasi
+          Edukasi &amp; Panduan Finansial
         </h1>
         <p className="mt-1 text-sm text-slate-500">
-          Selesaikan misi pencatatan finansial untuk meraih reward XP dan pelajari panduan dasar keuangan
+          Selesaikan target pencatatan finansial dan pelajari panduan dasar manajemen keuangan
         </p>
       </div>
 
-      {/* Ringkasan Progres Misi */}
+      {/* Ringkasan Progres Target */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-3">
         <Card>
           <div className="text-xs font-semibold uppercase text-slate-500">
-            Total Misi Selesai
+            Total Target Selesai
           </div>
           <div className="mt-1 text-2xl font-black text-emerald-600">
             {completedCount}{" "}
             <span className="text-sm font-normal text-slate-400">
-              / {missions.length} Misi
+              / {missions.length} Target
             </span>
           </div>
           <p className="mt-1 text-xs text-slate-400">
-            Selesaikan semua untuk reputasi finansial tertinggi
+            Selesaikan seluruh target untuk pemahaman finansial optimal
           </p>
         </Card>
 
         <Card>
           <div className="text-xs font-semibold uppercase text-slate-500">
-            Reward XP Tersedia
+            Poin Edukasi Tersedia
           </div>
           <div className="mt-1 text-2xl font-black text-amber-500">
             {missions
               .filter((m) => !m.isCompleted)
               .reduce((acc, m) => acc + m.xpReward, 0)}{" "}
-            XP
+            Poin
           </div>
           <p className="mt-1 text-xs text-slate-400">
-            Siap diklaim dari misi yang belum selesai
+            Dapat diperoleh dari target yang belum selesai
           </p>
         </Card>
 
@@ -127,12 +127,12 @@ export default function MissionsPage() {
         </Card>
       </div>
 
-      {/* ─── Daftar Misi Gamifikasi ────────────────────────────── */}
+      {/* ─── Daftar Target Pembelajaran ────────────────────────── */}
       <div className="space-y-4">
         <div className="flex items-center gap-2">
           <Award className="h-5 w-5 text-amber-500" />
           <h2 className="text-xl font-bold tracking-tight text-slate-900">
-            Daftar Misi Edukasi Finansial
+            Daftar Target Pembelajaran Finansial
           </h2>
         </div>
 

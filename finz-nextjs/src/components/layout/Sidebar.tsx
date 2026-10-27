@@ -1,4 +1,4 @@
-// src/components/layout/Sidebar.tsx — Sidebar Navigasi RPG FinZ Quest (Collapsible & Compact Labels)
+// src/components/layout/Sidebar.tsx — Sidebar Navigasi FinZ (Collapsible & Clean Professional Labels)
 "use client";
 
 import React, { useState } from "react";
@@ -6,21 +6,20 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
   Zap,
-  Swords,
+  LayoutDashboard,
   Receipt,
   ShieldCheck,
   TrendingUp,
   Target,
   BookOpen,
-  Coins,
-  Gem,
-  Flame,
+  Wallet,
+  Award,
+  Clock,
   ChevronLeft,
   ChevronRight,
   HelpCircle,
   LogOut,
   ShieldAlert,
-  Award,
   Globe,
 } from "lucide-react";
 import { formatCurrency } from "@/lib/formatters";
@@ -47,16 +46,15 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
   const progressPercent = Math.min(100, Math.round((xpInLevel / 100) * 100));
   const virtualBalanceNum = user ? Number(user.virtualBalance) : 10000000;
   const userName = user?.name ?? "Andi Pratama";
-  const gemsCount = Math.max(10, Math.floor(xp / 2) + 20);
 
-  const characterTitle =
+  const userStatusTitle =
     level >= 10
-      ? "Grand Master Finansial"
+      ? "Pengelola Mahir"
       : level >= 5
-      ? "Senior Capital Knight"
+      ? "Investor Pemula"
       : level >= 3
-      ? "Novice Budgeteer"
-      : "Cadet Finansial";
+      ? "Perencana Anggaran"
+      : "Pemula Finansial";
 
   async function handleLogout() {
     try {
@@ -70,12 +68,12 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
     }
   }
 
-  // Label navigasi ringkas, jelas, dan tidak terpotong (ellipsis)
+  // Label navigasi profesional, bersih, dan tanpa istilah game
   const navItems = [
     {
       name: "Dashboard",
       href: "/dashboard",
-      icon: Swords,
+      icon: LayoutDashboard,
       badge: null,
       isDashboard: true,
     },
@@ -89,25 +87,25 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
       name: "Anggaran",
       href: "/budgets",
       icon: ShieldCheck,
-      badge: "Shield",
+      badge: "50/30/20",
       badgeColor: "bg-emerald-100 text-emerald-800",
     },
     {
       name: "Investasi",
       href: "/investments",
       icon: TrendingUp,
-      badge: "+XP",
+      badge: "Simulasi",
       badgeColor: "bg-purple-100 text-purple-700",
     },
     {
       name: "Tabungan",
       href: "/savings",
       icon: Target,
-      badge: "Boss",
+      badge: "Target",
       badgeColor: "bg-amber-100 text-amber-800",
     },
     {
-      name: "Misi & Edukasi",
+      name: "Edukasi & Panduan",
       href: "/missions",
       icon: BookOpen,
       badge: null,
@@ -130,7 +128,7 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
           <Link
             href="/dashboard"
             className="flex items-center gap-2"
-            title="FinZ Quest RPG Edition"
+            title="FinZ Platform"
           >
             <div className="h-9 w-9 shrink-0 rounded-xl bg-gradient-to-tr from-emerald-600 via-primary to-emerald-400 flex items-center justify-center text-white font-black shadow-md shadow-emerald-500/20">
               <Zap className="h-5 w-5" />
@@ -138,10 +136,10 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
             {!isCollapsed && (
               <div>
                 <span className="font-headline text-[17px] font-extrabold text-[#0F172A] tracking-tight block leading-none">
-                  FinZ Quest
+                  Fin<span className="text-emerald-600">Z</span>
                 </span>
-                <span className="text-[9px] font-bold text-gamify-xp tracking-wider uppercase">
-                  RPG Edition
+                <span className="text-[9px] font-bold text-slate-500 tracking-wider uppercase">
+                  Edukasi Finansial
                 </span>
               </div>
             )}
@@ -150,8 +148,8 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
           {/* Minimize / Expand Toggle Button */}
           <div className="flex items-center gap-1">
             {!isCollapsed && (
-              <span className="px-2 py-0.5 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-white text-[9px] font-extrabold shadow-sm flex items-center gap-0.5">
-                <Award className="h-3 w-3" /> S1
+              <span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[9px] font-extrabold border border-emerald-200">
+                Edukasi
               </span>
             )}
             {onToggle && (
@@ -171,64 +169,62 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
           </div>
         </div>
 
-        {/* RPG Character Profile Card in Sidebar */}
+        {/* User Profile Card in Sidebar */}
         {!isCollapsed ? (
-          <div className="mx-3 mb-4 p-3 rounded-2xl bg-gradient-to-br from-surface-container-low via-surface-card to-gamify-xp-bg border-2 border-amber-300/70 shadow-sm relative overflow-hidden">
-            <div className="absolute -right-6 -top-6 w-16 h-16 bg-amber-200/40 rounded-full blur-lg pointer-events-none" />
-
-            {/* Character Avatar & Info */}
+          <div className="mx-3 mb-4 p-3 rounded-2xl bg-gradient-to-br from-slate-50 via-white to-emerald-50/40 border border-slate-200/90 shadow-sm relative overflow-hidden">
+            {/* User Avatar & Info */}
             <div className="flex items-center gap-2.5 mb-2 relative z-10">
               <div className="relative shrink-0">
-                <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 via-yellow-300 to-amber-500 shadow-md flex items-center justify-center">
+                <div className="w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-emerald-500 to-teal-400 shadow-sm flex items-center justify-center">
                   <div className="w-full h-full rounded-full bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center border-2 border-white uppercase">
                     {userName.substring(0, 2)}
                   </div>
                 </div>
-                <span className="absolute -bottom-1 -right-1 px-1.5 py-0.2 bg-gradient-to-r from-amber-500 to-yellow-500 text-white font-extrabold text-[8px] rounded-full ring-2 ring-white shadow">
+                <span className="absolute -bottom-1 -right-1 px-1.5 py-0.2 bg-emerald-700 text-white font-extrabold text-[8px] rounded-full ring-2 ring-white shadow">
                   Lv. {level}
                 </span>
               </div>
               <div className="min-w-0 flex-1">
                 <div className="font-headline text-xs font-bold text-[#0F172A] truncate flex items-center gap-1">
                   {userName}
-                  <span className="h-3 w-3 rounded-full bg-amber-100 text-amber-700 flex items-center justify-center text-[8px] font-bold shrink-0">
+                  <span className="h-3 w-3 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center text-[8px] font-bold shrink-0">
                     ✓
                   </span>
                 </div>
                 <div className="text-[10px] text-text-secondary truncate font-medium">
-                  <span className="text-gamify-xp font-bold">{characterTitle}</span>
+                  <span className="text-emerald-700 font-bold">{userStatusTitle}</span>
                 </div>
               </div>
             </div>
 
-            {/* EXP Bar */}
-            <div className="space-y-1 mb-2.5 bg-white/80 p-2 rounded-xl border border-border-subtle/80">
+            {/* Poin Edukasi Bar */}
+            <div className="space-y-1 mb-2.5 bg-white p-2 rounded-xl border border-slate-200">
               <div className="flex items-center justify-between text-[10px]">
-                <span className="font-bold text-gamify-xp flex items-center gap-1">
-                  <Zap className="h-2.5 w-2.5 text-gamify-xp" /> {xpInLevel} / 100 EXP
+                <span className="font-bold text-slate-700 flex items-center gap-1">
+                  <Award className="h-2.5 w-2.5 text-amber-500" /> {xpInLevel} / 100 Poin
                 </span>
-                <span className="font-extrabold text-secondary text-[10px]">{progressPercent}%</span>
+                <span className="font-extrabold text-emerald-700 text-[10px]">{progressPercent}%</span>
               </div>
-              <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden shadow-inner border border-slate-200">
+              <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden border border-slate-200">
                 <div
-                  className="bg-gradient-to-r from-secondary via-gamify-xp to-primary-container h-full rounded-full transition-all duration-700"
+                  className="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full transition-all duration-700"
                   style={{ width: `${progressPercent}%` }}
                 />
               </div>
-              <div className="flex justify-between items-center text-[9px] text-text-muted">
-                <span>Tier Explorer {level}</span>
-                <span className="text-primary font-bold">+{100 - xpInLevel} EXP</span>
+              <div className="flex justify-between items-center text-[9px] text-slate-500">
+                <span>Level {level}</span>
+                <span className="text-emerald-700 font-bold">+{100 - xpInLevel} Poin ke Lv.{level + 1}</span>
               </div>
             </div>
 
-            {/* Currencies RPG Widget */}
-            <div className="grid grid-cols-3 gap-1 pt-1 border-t border-border-subtle/60 text-center">
-              <div className="p-1 rounded-lg bg-amber-50 border border-amber-200/60 flex flex-col items-center">
-                <span className="text-[9px] text-amber-800 font-bold flex items-center gap-0.5">
-                  <Coins className="h-2.5 w-2.5 text-amber-600" /> Gold
+            {/* Currencies & Stats Widget */}
+            <div className="grid grid-cols-3 gap-1 pt-1 border-t border-slate-100 text-center">
+              <div className="p-1 rounded-lg bg-emerald-50/70 border border-emerald-100 flex flex-col items-center">
+                <span className="text-[9px] text-emerald-800 font-bold flex items-center gap-0.5">
+                  <Wallet className="h-2.5 w-2.5 text-emerald-600" /> Saldo
                 </span>
                 <span
-                  className="font-mono-currency text-[10px] font-extrabold text-amber-900 block truncate mt-0.5"
+                  className="font-mono-currency text-[10px] font-extrabold text-emerald-950 block truncate mt-0.5"
                   title={formatCurrency(virtualBalanceNum)}
                 >
                   {virtualBalanceNum >= 1000000
@@ -236,19 +232,19 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
                     : formatCurrency(virtualBalanceNum)}
                 </span>
               </div>
-              <div className="p-1 rounded-lg bg-purple-50 border border-purple-200/60 flex flex-col items-center">
-                <span className="text-[9px] text-purple-800 font-bold flex items-center gap-0.5">
-                  <Gem className="h-2.5 w-2.5 text-purple-600" /> Gems
+              <div className="p-1 rounded-lg bg-amber-50/70 border border-amber-100 flex flex-col items-center">
+                <span className="text-[9px] text-amber-800 font-bold flex items-center gap-0.5">
+                  <Award className="h-2.5 w-2.5 text-amber-600" /> Poin
                 </span>
-                <span className="font-mono-currency text-[10px] font-extrabold text-purple-900 block mt-0.5">
-                  {gemsCount}
+                <span className="font-mono-currency text-[10px] font-extrabold text-amber-950 block mt-0.5">
+                  {xp} XP
                 </span>
               </div>
-              <div className="p-1 rounded-lg bg-rose-50 border border-rose-200/60 flex flex-col items-center">
-                <span className="text-[9px] text-rose-800 font-bold flex items-center gap-0.5">
-                  <Flame className="h-2.5 w-2.5 text-rose-600" /> Streak
+              <div className="p-1 rounded-lg bg-blue-50/70 border border-blue-100 flex flex-col items-center">
+                <span className="text-[9px] text-blue-800 font-bold flex items-center gap-0.5">
+                  <Clock className="h-2.5 w-2.5 text-blue-600" /> Aktif
                 </span>
-                <span className="font-mono-currency text-[10px] font-extrabold text-rose-900 block mt-0.5">
+                <span className="font-mono-currency text-[10px] font-extrabold text-blue-950 block mt-0.5">
                   5 Hari
                 </span>
               </div>
@@ -258,13 +254,13 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
           /* Minimized Character View — hanya avatar profil, 3 icon dihilangkan saat minimize */
           <div className="flex flex-col items-center my-3">
             <div
-              className="relative w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 to-yellow-300 shadow-md cursor-pointer"
-              title={`${userName} (Lv. ${level}) - ${xpInLevel}/100 EXP`}
+              className="relative w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-emerald-500 to-teal-400 shadow-md cursor-pointer"
+              title={`${userName} (Lv. ${level}) - ${xpInLevel}/100 Poin`}
             >
               <div className="w-full h-full rounded-full bg-emerald-600 text-white font-extrabold text-xs flex items-center justify-center uppercase">
                 {userName.substring(0, 2)}
               </div>
-              <span className="absolute -bottom-1 -right-1 px-1 bg-amber-500 text-white font-extrabold text-[8px] rounded-full">
+              <span className="absolute -bottom-1 -right-1 px-1 bg-emerald-700 text-white font-extrabold text-[8px] rounded-full">
                 {level}
               </span>
             </div>
@@ -322,30 +318,30 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
       <div className="p-3 space-y-2 border-t border-border-subtle/50 mt-auto pb-4">
         {!isCollapsed ? (
           <>
-            <div className="bg-gradient-to-r from-surface-container-low to-purple-50/50 p-2.5 rounded-xl border border-purple-200/50 text-[11px]">
-              <div className="flex items-center gap-1.5 mb-0.5 text-secondary font-bold text-xs">
-                <ShieldAlert className="h-3.5 w-3.5 shrink-0" />
-                <span>Simulasi Aman</span>
+            <div className="bg-slate-50 p-2.5 rounded-xl border border-slate-200 text-[11px]">
+              <div className="flex items-center gap-1.5 mb-0.5 text-emerald-800 font-bold text-xs">
+                <ShieldAlert className="h-3.5 w-3.5 shrink-0 text-emerald-600" />
+                <span>Simulasi Edukatif</span>
               </div>
               <p className="text-text-secondary text-[10px] leading-relaxed">
-                Saldo & token 100% virtual untuk sarana latihan tanpa risiko uang riil.
+                Seluruh saldo dan transaksi adalah simulasi pembelajaran tanpa risiko uang riil.
               </p>
             </div>
 
             <div className="flex items-center justify-between px-1 text-xs text-text-secondary pt-0.5">
               <Link
-                href="/"
-                className="flex items-center gap-1 hover:text-emerald-700 transition-colors font-medium text-[11px]"
-                title="Kunjungi Landing Page FinZ"
+                href="/missions#faq"
+                className="flex items-center gap-1 hover:text-slate-900 transition-colors font-medium text-[11px]"
+                title="Pusat Bantuan & Panduan Finansial"
               >
-                <Globe className="h-3.5 w-3.5" />
-                Landing Page
+                <HelpCircle className="h-3.5 w-3.5" />
+                Pusat Bantuan
               </Link>
               <button
                 onClick={handleLogout}
                 disabled={isLoggingOut}
                 className="flex items-center gap-1 hover:text-rose-600 transition-colors font-medium text-slate-500 text-[11px] disabled:opacity-50"
-                title="Keluar dari akun dan kembali ke Landing Page"
+                title="Keluar dari akun dan kembali ke Halaman Depan"
               >
                 <LogOut className="h-3.5 w-3.5" />
                 {isLoggingOut ? "..." : "Keluar"}
@@ -358,14 +354,14 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
             <Link
               href="/"
               className="p-2 rounded-lg text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 transition-colors"
-              title="Kunjungi Landing Page FinZ"
+              title="Kunjungi Halaman Depan FinZ"
             >
               <Globe className="h-4 w-4" />
             </Link>
             <Link
               href="/missions#faq"
               className="p-2 rounded-lg text-slate-500 hover:text-[#0F172A] hover:bg-slate-100 transition-colors"
-              title="Bantuan Guild & FAQ"
+              title="Pusat Bantuan & Panduan"
             >
               <HelpCircle className="h-4 w-4" />
             </Link>
@@ -373,7 +369,7 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
               onClick={handleLogout}
               disabled={isLoggingOut}
               className="p-2 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors disabled:opacity-50"
-              title="Keluar dari akun dan kembali ke Landing Page"
+              title="Keluar dari akun dan kembali ke Halaman Depan"
             >
               <LogOut className="h-4 w-4" />
             </button>
