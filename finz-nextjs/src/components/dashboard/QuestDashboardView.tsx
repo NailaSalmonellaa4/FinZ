@@ -1,8 +1,41 @@
-// src/components/dashboard/QuestDashboardView.tsx — Tampilan Interaktif Dashboard RPG FinZ Quest
+// src/components/dashboard/QuestDashboardView.tsx — Tampilan Interaktif Dashboard RPG FinZ Quest (Zero Emoji & Live Database Mutation)
 "use client";
 
 import React, { useState } from "react";
 import Link from "next/link";
+import {
+  Swords,
+  Flame,
+  Sparkles,
+  Gamepad2,
+  Gift,
+  Coins,
+  Gem,
+  ArrowDownLeft,
+  ArrowUpRight,
+  ShieldCheck,
+  ShieldAlert,
+  Target,
+  Trophy,
+  Laptop,
+  Receipt,
+  Medal,
+  Crown,
+  Activity,
+  CheckCircle2,
+  Hourglass,
+  Play,
+  ArrowRight,
+  Clock,
+  Utensils,
+  Wallet,
+  BookOpen,
+  Tag,
+  Loader2,
+  X,
+  CreditCard,
+  TrendingUp,
+} from "lucide-react";
 import { formatCurrency, formatDateShort } from "@/lib/formatters";
 import type { dashboardService } from "@/server/services/dashboard.service";
 
@@ -17,7 +50,13 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
     title: string;
     desc: string;
   } | null>(null);
+
+  // Dynamic state that reflects real-time database updates
+  const [currentLevel, setCurrentLevel] = useState(data.xpProgress.currentLevel);
+  const [currentXp, setCurrentXp] = useState(data.xpProgress.currentXp);
+  const [isClaimingChest, setIsClaimingChest] = useState(false);
   const [hasClaimedChest, setHasClaimedChest] = useState(false);
+  const [isClaimingMisi1, setIsClaimingMisi1] = useState(false);
   const [hasClaimedMisi1, setHasClaimedMisi1] = useState(false);
 
   const totalIncomeNum = Number(data.cashflow.totalIncome);
@@ -26,37 +65,72 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
   const virtualBalanceNum = Number(data.portfolio.virtualBalance);
   const totalPortfolioValueNum = Number(data.portfolio.totalPortfolioValue);
 
-  const level = data.xpProgress.currentLevel;
-  const xpInLevel = data.xpProgress.xpInCurrentLevel;
-  const progressPercent = data.xpProgress.progressPercentage;
+  const xpInLevel = currentXp % 100;
+  const progressPercent = Math.min(100, Math.round((xpInLevel / 100) * 100));
   const xpNeeded = Math.max(0, 100 - xpInLevel);
 
   function triggerToast(title: string, desc: string) {
     setToastMessage({ title, desc });
     setTimeout(() => {
       setToastMessage(null);
-    }, 4000);
+    }, 4500);
   }
 
-  function handleClaimChest() {
-    if (hasClaimedChest) return;
-    setHasClaimedChest(true);
-    triggerToast(
-      "🎁 Peti Harian Berhasil Diklaim!",
-      `+15 EXP & +5 Gems ditambahkan ke status ${data.user.name}! 🔥`
-    );
+  // Real Database Mutation: Klaim Peti Harian
+  async function handleClaimChest() {
+    if (hasClaimedChest || isClaimingChest) return;
+    try {
+      setIsClaimingChest(true);
+      const res = await fetch("/api/gamification/chest", { method: "POST" });
+      const json = await res.json();
+
+      if (json.success && json.data) {
+        setHasClaimedChest(true);
+        setCurrentXp(json.data.currentXp);
+        setCurrentLevel(json.data.currentLevel);
+        triggerToast(
+          "Peti Harian Berhasil Diklaim!",
+          `+${json.data.xpGained} EXP & +5 Gems tersimpan ke database untuk ${data.user.name}!`
+        );
+      } else {
+        triggerToast("Info", json.message || "Gagal mengklaim peti harian");
+      }
+    } catch (err) {
+      console.error("Gagal klaim peti harian:", err);
+      triggerToast("Error", "Terjadi kesalahan saat menyimpan klaim ke database");
+    } finally {
+      setIsClaimingChest(false);
+    }
   }
 
-  function handleClaimMisi1() {
-    if (hasClaimedMisi1) return;
-    setHasClaimedMisi1(true);
-    triggerToast(
-      "🎯 Misi Harian Berhasil Diklaim!",
-      `+10 EXP & lencana Disiplin diperkuat! ⚡`
-    );
+  // Real Database Mutation: Klaim Hadiah Misi Harian
+  async function handleClaimMisi1() {
+    if (hasClaimedMisi1 || isClaimingMisi1) return;
+    try {
+      setIsClaimingMisi1(true);
+      const res = await fetch("/api/gamification/mission", { method: "POST" });
+      const json = await res.json();
+
+      if (json.success && json.data) {
+        setHasClaimedMisi1(true);
+        setCurrentXp(json.data.currentXp);
+        setCurrentLevel(json.data.currentLevel);
+        triggerToast(
+          "Hadiah Misi Berhasil Diklaim!",
+          `+${json.data.xpGained} EXP tersimpan ke database & lencana Disiplin diperkuat!`
+        );
+      } else {
+        triggerToast("Info", json.message || "Gagal mengklaim misi");
+      }
+    } catch (err) {
+      console.error("Gagal klaim misi harian:", err);
+      triggerToast("Error", "Terjadi kesalahan saat menyimpan klaim misi ke database");
+    } finally {
+      setIsClaimingMisi1(false);
+    }
   }
 
-  // Top savings goal or default
+  // Top savings goal or clean fallback
   const topGoal = data.savings.items[0] || {
     id: "default-laptop",
     title: "Laptop Belajar SMK",
@@ -74,31 +148,61 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
     topGoalTarget > 0 ? (topGoalCurrent / topGoalTarget) * 100 : 53.3
   );
 
-  // Category Icon & Tag Helper
+  // Category Icon & Label Helper (Zero Emoji, Real Lucide Icons)
   function getCategoryVisual(category: string, type: "INCOME" | "EXPENSE") {
     if (type === "INCOME") {
-      return { emoji: "💰", badge: "Income Buff", bg: "bg-emerald-100", border: "border-emerald-200", text: "text-emerald-700" };
+      return {
+        icon: ArrowDownLeft,
+        badge: "Income Buff",
+        bg: "bg-emerald-100",
+        border: "border-emerald-200",
+        text: "text-emerald-700",
+      };
     }
     const catLower = category.toLowerCase();
     if (catLower.includes("makan") || catLower.includes("snack") || catLower.includes("kantin")) {
-      return { emoji: "🍔", badge: "Pos Makanan", bg: "bg-amber-100", border: "border-amber-200", text: "text-amber-700" };
+      return {
+        icon: Utensils,
+        badge: "Pos Makanan",
+        bg: "bg-amber-100",
+        border: "border-amber-200",
+        text: "text-amber-700",
+      };
     }
     if (catLower.includes("buku") || catLower.includes("ajar") || catLower.includes("kursus") || catLower.includes("ilmu")) {
-      return { emoji: "📚", badge: "Skill Upgrade", bg: "bg-indigo-100", border: "border-indigo-200", text: "text-secondary" };
+      return {
+        icon: BookOpen,
+        badge: "Skill Upgrade",
+        bg: "bg-indigo-100",
+        border: "border-indigo-200",
+        text: "text-secondary",
+      };
     }
     if (catLower.includes("hibur") || catLower.includes("game") || catLower.includes("nongkrong")) {
-      return { emoji: "🎮", badge: "Pos Hiburan", bg: "bg-purple-100", border: "border-purple-200", text: "text-gamify-xp" };
+      return {
+        icon: Gamepad2,
+        badge: "Pos Hiburan",
+        bg: "bg-purple-100",
+        border: "border-purple-200",
+        text: "text-gamify-xp",
+      };
     }
-    return { emoji: "🏷️", badge: category, bg: "bg-slate-100", border: "border-slate-200", text: "text-slate-700" };
+    return {
+      icon: Tag,
+      badge: category,
+      bg: "bg-slate-100",
+      border: "border-slate-200",
+      text: "text-slate-700",
+    };
   }
 
   return (
     <div className="flex flex-col w-full space-y-6">
-      {/* ─── HERO / QUEST BANNER: Game RPG & Adventure Theme ─── */}
+      {/* ─── HERO / QUEST BANNER: Clean RPG & Adventure Theme (Zero Emoji) ─── */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#005236] via-[#006c49] to-[#4648d4] p-6 md:p-8 text-white shadow-xl border border-emerald-400/20">
         <div className="absolute -right-16 -top-16 h-64 w-64 rounded-full bg-white/10 blur-3xl pointer-events-none" />
         <div className="absolute right-60 -bottom-20 h-52 w-52 rounded-full bg-purple-400/20 blur-2xl pointer-events-none" />
-        <div className="absolute left-1/3 top-2 text-white/10 text-7xl font-extrabold select-none pointer-events-none">
+        <div className="absolute left-1/3 top-2 text-white/10 text-7xl font-extrabold select-none pointer-events-none font-headline">
           QUEST
         </div>
 
@@ -106,18 +210,22 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
           <div className="space-y-3 max-w-2xl">
             <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 backdrop-blur-md text-white font-label-sm text-xs font-bold border border-white/25">
-                <span className="text-sm">⚔️</span> Level {level} • Explorer Finansial
+                <Swords className="h-3.5 w-3.5 text-emerald-300" />
+                Level {currentLevel} • Explorer Finansial
               </span>
               <span className="inline-flex items-center gap-1 px-3 py-1 rounded-full bg-gradient-to-r from-amber-400 to-amber-500 text-amber-950 font-label-sm text-xs font-extrabold shadow-sm">
-                <span>🔥</span> 5 Hari Streak Aktif
+                <Flame className="h-3.5 w-3.5 text-amber-950" />
+                5 Hari Streak Aktif
               </span>
               <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-purple-500/40 text-purple-100 font-label-sm text-xs font-bold backdrop-blur-md border border-purple-300/30">
-                <span>✨</span> +25% EXP Buff
+                <Sparkles className="h-3.5 w-3.5 text-purple-200" />
+                +25% EXP Buff
               </span>
             </div>
 
-            <h1 className="font-headline text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-tight">
-              🎮 Petualangan Finansial {data.user.name}: Season 1 - Cashflow Mastery
+            <h1 className="font-headline text-2xl md:text-3xl font-extrabold tracking-tight text-white leading-tight flex items-center gap-2">
+              <Gamepad2 className="h-8 w-8 text-emerald-300 shrink-0" />
+              Petualangan Finansial {data.user.name}: Season 1 - Cashflow Mastery
             </h1>
             <p className="font-body text-sm md:text-base text-emerald-100/90 leading-relaxed">
               Selesaikan misi harian, kalahkan boncos, dan kumpulkan EXP untuk menjadi Grand Master Finansial! Semua aset virtual 100% aman untuk petualanganmu.
@@ -125,18 +233,18 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
           </div>
 
           {/* HUD Status Card */}
-          <div className="bg-white/95 backdrop-blur-md text-[#0F172A] rounded-2xl p-5 shadow-2xl w-full lg:w-84 border-2 border-amber-300/60 flex flex-col justify-between space-y-3.5">
+          <div className="bg-white/95 backdrop-blur-md text-[#0F172A] rounded-2xl p-5 shadow-2xl w-full lg:w-84 border-2 border-amber-300/60 flex flex-col justify-between space-y-3.5 shrink-0">
             <div className="flex items-center justify-between">
               <div>
                 <span className="px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 font-extrabold text-[11px] tracking-wide inline-flex items-center gap-1">
-                  <span className="material-symbols-outlined text-xs">shield</span> Tier Explorer {level}
+                  <ShieldCheck className="h-3 w-3 text-amber-700" /> Tier Explorer {currentLevel}
                 </span>
                 <div className="font-headline text-base text-secondary font-extrabold mt-1">
                   {xpInLevel} <span className="text-xs text-text-muted font-normal">/ 100 EXP</span>
                 </div>
               </div>
               <div className="h-11 w-11 rounded-2xl bg-gradient-to-tr from-gamify-xp to-secondary text-white flex items-center justify-center font-extrabold shadow-md">
-                <span className="material-symbols-outlined text-2xl">trophy</span>
+                <Trophy className="h-6 w-6 text-white" />
               </div>
             </div>
 
@@ -150,16 +258,16 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
               </div>
               <div className="flex justify-between items-center text-[11px]">
                 <span className="text-text-muted flex items-center gap-1 font-semibold">
-                  <span className="material-symbols-outlined text-xs text-status-safe">add_circle</span> +10 EXP per aksi
+                  <Sparkles className="h-3 w-3 text-status-safe" /> +10 EXP per aksi
                 </span>
                 <span className="font-bold text-primary">Sisa {xpNeeded} EXP lagi!</span>
               </div>
             </div>
 
-            {/* Daily Chest Claim Button */}
+            {/* Daily Chest Claim Button (Direct Database Action) */}
             <button
               onClick={handleClaimChest}
-              disabled={hasClaimedChest}
+              disabled={hasClaimedChest || isClaimingChest}
               className={`w-full py-2.5 px-3 rounded-xl font-label-md font-extrabold text-xs shadow-md transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 ${
                 hasClaimedChest
                   ? "bg-slate-200 text-slate-500 cursor-not-allowed"
@@ -167,7 +275,12 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
               }`}
               type="button"
             >
-              <span>🎁</span> {hasClaimedChest ? "Peti Harian Terklaim ✅" : "Klaim Peti Harian (+15 EXP)"}
+              {isClaimingChest ? (
+                <Loader2 className="h-4 w-4 animate-spin text-amber-950" />
+              ) : (
+                <Gift className="h-4 w-4 text-amber-950" />
+              )}
+              <span>{hasClaimedChest ? "Peti Harian Terklaim ✓" : "Klaim Peti Harian (+15 EXP)"}</span>
             </button>
           </div>
         </div>
@@ -176,21 +289,21 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
       {/* ─── 4 RPG ATTRIBUTE CARDS (Financial Overview) ────────── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
         {/* Card 1: Pundi Kas Tersedia */}
-        <div className="rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-all duration-200 border-2 border-emerald-500/20 hover:border-emerald-500/50 relative overflow-hidden group">
-          <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-50 rounded-full group-hover:scale-125 transition-transform pointer-events-none" />
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-text-secondary flex items-center gap-1">
-              <span>🪙</span> Pundi Kas Tersedia
+        <div className="rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-all duration-200 border-2 border-emerald-500/20 hover:border-emerald-500/50 flex flex-col justify-between h-full group">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold text-text-secondary flex items-center gap-1.5">
+              <Coins className="h-4 w-4 text-amber-600" />
+              Pundi Kas Tersedia
             </span>
             <div className="h-9 w-9 rounded-xl bg-status-safe-bg text-status-safe flex items-center justify-center shadow-xs">
-              <span className="material-symbols-outlined text-xl">account_balance_wallet</span>
+              <Wallet className="h-5 w-5" />
             </div>
           </div>
           <div>
             <p className="font-headline text-xl font-extrabold text-text-primary tracking-tight">
               {formatCurrency(virtualBalanceNum)}
             </p>
-            <div className="flex items-center gap-1.5 mt-2">
+            <div className="flex items-center gap-1.5 mt-2.5">
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-status-safe-bg text-status-safe">
                 Siap Dipakai
               </span>
@@ -200,21 +313,21 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
         </div>
 
         {/* Card 2: Mana Pemasukan */}
-        <div className="rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-all duration-200 border-2 border-primary/20 hover:border-primary/50 relative overflow-hidden group">
-          <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-emerald-50 rounded-full group-hover:scale-125 transition-transform pointer-events-none" />
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-text-secondary flex items-center gap-1">
-              <span>📥</span> Mana Pemasukan
+        <div className="rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-all duration-200 border-2 border-primary/20 hover:border-primary/50 flex flex-col justify-between h-full group">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold text-text-secondary flex items-center gap-1.5">
+              <ArrowDownLeft className="h-4 w-4 text-primary" />
+              Mana Pemasukan
             </span>
             <div className="h-9 w-9 rounded-xl bg-status-safe-bg text-primary flex items-center justify-center shadow-xs">
-              <span className="material-symbols-outlined text-xl">trending_up</span>
+              <TrendingUp className="h-5 w-5" />
             </div>
           </div>
           <div>
             <p className="font-headline text-xl font-extrabold text-text-primary tracking-tight">
               {formatCurrency(totalIncomeNum)}
             </p>
-            <div className="flex items-center gap-1.5 mt-2">
+            <div className="flex items-center gap-1.5 mt-2.5">
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-emerald-100 text-emerald-800">
                 +12% Buff
               </span>
@@ -224,21 +337,21 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
         </div>
 
         {/* Card 3: Beban Pengeluaran */}
-        <div className="rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-all duration-200 border-2 border-indigo-500/20 hover:border-indigo-500/50 relative overflow-hidden group">
-          <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-indigo-50 rounded-full group-hover:scale-125 transition-transform pointer-events-none" />
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-text-secondary flex items-center gap-1">
-              <span>📤</span> Beban Pengeluaran
+        <div className="rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-all duration-200 border-2 border-indigo-500/20 hover:border-indigo-500/50 flex flex-col justify-between h-full group">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold text-text-secondary flex items-center gap-1.5">
+              <ArrowUpRight className="h-4 w-4 text-secondary" />
+              Beban Pengeluaran
             </span>
             <div className="h-9 w-9 rounded-xl bg-indigo-50 text-secondary flex items-center justify-center shadow-xs">
-              <span className="material-symbols-outlined text-xl">payments</span>
+              <CreditCard className="h-5 w-5" />
             </div>
           </div>
           <div>
             <p className="font-headline text-xl font-extrabold text-text-primary tracking-tight">
               {formatCurrency(totalExpenseNum)}
             </p>
-            <div className="flex items-center gap-1.5 mt-2">
+            <div className="flex items-center gap-1.5 mt-2.5">
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-indigo-100 text-secondary">
                 Terkendali {data.budgets.summary?.totalUsagePercentage ? `${data.budgets.summary.totalUsagePercentage.toFixed(0)}%` : "54%"}
               </span>
@@ -248,21 +361,21 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
         </div>
 
         {/* Card 4: Vault Investasi */}
-        <div className="rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-all duration-200 border-2 border-purple-500/20 hover:border-purple-500/50 relative overflow-hidden group">
-          <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-purple-50 rounded-full group-hover:scale-125 transition-transform pointer-events-none" />
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-xs font-bold text-text-secondary flex items-center gap-1">
-              <span>💎</span> Vault Investasi
+        <div className="rounded-2xl bg-white p-5 shadow-sm hover:shadow-md transition-all duration-200 border-2 border-purple-500/20 hover:border-purple-500/50 flex flex-col justify-between h-full group">
+          <div className="flex items-center justify-between mb-3">
+            <span className="text-xs font-bold text-text-secondary flex items-center gap-1.5">
+              <Gem className="h-4 w-4 text-purple-600" />
+              Vault Investasi
             </span>
             <div className="h-9 w-9 rounded-xl bg-gamify-xp-bg text-gamify-xp flex items-center justify-center shadow-xs">
-              <span className="material-symbols-outlined text-xl">query_stats</span>
+              <Activity className="h-5 w-5" />
             </div>
           </div>
           <div>
             <p className="font-headline text-xl font-extrabold text-text-primary tracking-tight">
               {formatCurrency(totalPortfolioValueNum > 0 ? totalPortfolioValueNum : 10450000)}
             </p>
-            <div className="flex items-center gap-1.5 mt-2">
+            <div className="flex items-center gap-1.5 mt-2.5">
               <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-extrabold bg-purple-100 text-gamify-xp">
                 {data.portfolio.totalProfitLossPercentage >= 0 ? "+" : ""}
                 {data.portfolio.totalProfitLossPercentage > 0
@@ -275,12 +388,12 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
         </div>
       </div>
 
-      {/* ─── DAILY ACTION QUESTS (Gamified Quest Hub) ─────────── */}
+      {/* ─── DAILY ACTION QUESTS (Gamified Hub) ───────────────── */}
       <div className="rounded-3xl bg-white p-6 shadow-sm border border-border-subtle">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2.5">
             <div className="h-8 w-8 rounded-xl bg-amber-100 text-amber-700 flex items-center justify-center font-bold">
-              <span className="material-symbols-outlined text-xl">swords</span>
+              <Swords className="h-4 w-4" />
             </div>
             <div>
               <h2 className="font-headline text-lg text-text-primary font-extrabold">Aksi Cepat Quest Harian</h2>
@@ -288,7 +401,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
             </div>
           </div>
           <span className="px-3 py-1 rounded-full bg-purple-50 border border-purple-200 text-gamify-xp font-label-sm text-xs font-bold flex items-center gap-1">
-            <span className="material-symbols-outlined text-sm">stars</span> Bonus XP &amp; Gems Aktif
+            <Sparkles className="h-3.5 w-3.5 text-gamify-xp" /> Bonus XP &amp; Gems Aktif
           </span>
         </div>
 
@@ -299,8 +412,8 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
             className="group flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-emerald-50/80 to-teal-50/60 border-2 border-emerald-300 hover:border-emerald-500 hover:shadow-md transition-all text-left cursor-pointer active:scale-98"
           >
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                ⚔️
+              <div className="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-emerald-600 group-hover:scale-110 transition-transform">
+                <Receipt className="h-6 w-6" />
               </div>
               <div>
                 <span className="block font-headline text-sm font-extrabold text-text-primary group-hover:text-primary">
@@ -323,8 +436,8 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
             className="group flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-blue-50/80 to-indigo-50/60 border-2 border-indigo-300 hover:border-secondary hover:shadow-md transition-all text-left cursor-pointer active:scale-98"
           >
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                🛡️
+              <div className="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-secondary group-hover:scale-110 transition-transform">
+                <ShieldCheck className="h-6 w-6" />
               </div>
               <div>
                 <span className="block font-headline text-sm font-extrabold text-text-primary group-hover:text-secondary">
@@ -347,8 +460,8 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
             className="group flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-purple-50/80 to-fuchsia-50/60 border-2 border-purple-300 hover:border-gamify-xp hover:shadow-md transition-all text-left cursor-pointer active:scale-98"
           >
             <div className="flex items-center gap-3">
-              <div className="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                🚀
+              <div className="h-12 w-12 rounded-xl bg-white shadow-sm flex items-center justify-center text-gamify-xp group-hover:scale-110 transition-transform">
+                <TrendingUp className="h-6 w-6" />
               </div>
               <div>
                 <span className="block font-headline text-sm font-extrabold text-text-primary group-hover:text-gamify-xp">
@@ -368,7 +481,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
       </div>
 
       {/* ─── MAIN 2-COLUMN GRID (8 Col Left / 4 Col Right) ─────── */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
         {/* LEFT COLUMN (8 Cols): Battle Stats Chart & Adventure Log */}
         <div className="lg:col-span-8 flex flex-col space-y-6">
           {/* Cashflow Chart: Monthly Battle Stats */}
@@ -376,7 +489,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 mb-6">
               <div>
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">🗺️</span>
+                  <Activity className="h-5 w-5 text-emerald-600" />
                   <h2 className="font-headline text-lg text-text-primary font-extrabold">
                     Peta Arus Kas Q1 2025 (Monthly Battle Stats)
                   </h2>
@@ -414,7 +527,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                   </div>
                   <span className="text-xs font-bold text-text-primary">Januari</span>
                   <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-extrabold text-[10px] border border-emerald-200">
-                    Surplus +380k 🪙
+                    Surplus +380k Gold
                   </span>
                 </div>
 
@@ -434,14 +547,14 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                   </div>
                   <span className="text-xs font-bold text-text-primary">Februari</span>
                   <span className="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-800 font-extrabold text-[10px] border border-emerald-200">
-                    Surplus +450k 🪙
+                    Surplus +450k Gold
                   </span>
                 </div>
 
                 {/* Maret (Active Battle) */}
                 <div className="flex-1 flex flex-col items-center gap-2 group relative">
-                  <span className="absolute -top-6 px-2 py-0.5 rounded-full bg-amber-400 text-amber-950 font-extrabold text-[9px] shadow-sm animate-bounce">
-                    ⚔️ ACTIVE BATTLE
+                  <span className="absolute -top-6 px-2 py-0.5 rounded-full bg-amber-400 text-amber-950 font-extrabold text-[9px] shadow-sm animate-bounce flex items-center gap-1">
+                    <Swords className="h-2.5 w-2.5" /> ACTIVE BATTLE
                   </span>
                   <div className="w-full flex items-end justify-center gap-2 h-40">
                     <div
@@ -461,7 +574,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                   </div>
                   <span className="text-xs font-bold text-primary">Maret (Berjalan)</span>
                   <span className="px-2 py-0.5 rounded-full bg-gradient-to-r from-emerald-100 to-green-100 text-emerald-900 font-extrabold text-[10px] border border-emerald-300 shadow-xs">
-                    Surplus +{netCashflowNum > 0 ? `${(netCashflowNum / 1000).toFixed(0)}k` : "680k"} 🪙
+                    Surplus +{netCashflowNum > 0 ? `${(netCashflowNum / 1000).toFixed(0)}k` : "680k"} Gold
                   </span>
                 </div>
               </div>
@@ -479,7 +592,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
           <div className="rounded-3xl bg-white p-6 shadow-sm border border-border-subtle">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <span className="text-xl">📜</span>
+                <Receipt className="h-5 w-5 text-indigo-600" />
                 <div>
                   <h2 className="font-headline text-lg text-text-primary font-extrabold">
                     Log Petualangan &amp; Transaksi Terkini
@@ -493,7 +606,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                 href="/transactions"
                 className="text-xs text-secondary hover:text-primary transition-colors flex items-center gap-1 font-bold bg-indigo-50 px-3 py-1.5 rounded-xl border border-indigo-200"
               >
-                Buka Arsip Lengkap <span className="material-symbols-outlined text-sm">arrow_forward</span>
+                Buka Arsip Lengkap <ArrowRight className="h-3.5 w-3.5" />
               </Link>
             </div>
 
@@ -501,6 +614,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
               {data.recentTransactions.length > 0 ? (
                 data.recentTransactions.map((trx) => {
                   const visual = getCategoryVisual(trx.category, trx.type);
+                  const IconComp = visual.icon;
                   const isIncome = trx.type === "INCOME";
                   const xpBonus = isIncome ? "+15 EXP" : "+10 EXP";
 
@@ -511,9 +625,9 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                     >
                       <div className="flex items-center gap-3.5">
                         <div
-                          className={`h-11 w-11 rounded-2xl ${visual.bg} border ${visual.border} flex items-center justify-center ${visual.text} text-xl shadow-xs`}
+                          className={`h-11 w-11 rounded-2xl ${visual.bg} border ${visual.border} flex items-center justify-center ${visual.text} shadow-xs`}
                         >
-                          {visual.emoji}
+                          <IconComp className="h-5 w-5" />
                         </div>
                         <div>
                           <div className="flex items-center gap-2">
@@ -527,7 +641,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                             </span>
                           </div>
                           <p className="text-xs text-text-muted flex items-center gap-1 mt-0.5">
-                            <span className="material-symbols-outlined text-xs">schedule</span>
+                            <Clock className="h-3 w-3" />
                             {formatDateShort(trx.transactionDate)} • QRIS Virtual Quest
                           </p>
                         </div>
@@ -543,19 +657,19 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                           {formatCurrency(Number(trx.amount))}
                         </p>
                         <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-purple-100 text-gamify-xp text-[10px] font-extrabold">
-                          <span className="material-symbols-outlined text-[11px]">bolt</span> {xpBonus}
+                          <Sparkles className="h-2.5 w-2.5 text-gamify-xp" /> {xpBonus}
                         </span>
                       </div>
                     </div>
                   );
                 })
               ) : (
-                // Default fallback transactions from user's mockup when brand new
+                // Fallback default transactions when brand new
                 <>
                   <div className="pt-3 pb-2 flex items-center justify-between hover:bg-slate-50/80 px-3 rounded-2xl transition-colors border border-transparent hover:border-slate-200">
                     <div className="flex items-center gap-3.5">
-                      <div className="h-11 w-11 rounded-2xl bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-700 text-xl shadow-xs">
-                        🍔
+                      <div className="h-11 w-11 rounded-2xl bg-amber-100 border border-amber-200 flex items-center justify-center text-amber-700 shadow-xs">
+                        <Utensils className="h-5 w-5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
@@ -563,22 +677,22 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                           <span className="px-2 py-0.5 rounded-full bg-amber-100 text-amber-800 text-[10px] font-bold">Pos Makanan</span>
                         </div>
                         <p className="text-xs text-text-muted flex items-center gap-1 mt-0.5">
-                          <span className="material-symbols-outlined text-xs">schedule</span> Hari Ini, 12:40 WIB • QRIS Virtual Quest
+                          <Clock className="h-3 w-3" /> Hari Ini, 12:40 WIB • QRIS Virtual Quest
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
                       <p className="font-mono-currency text-sm text-status-danger font-extrabold">-Rp 25.000</p>
                       <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-purple-100 text-gamify-xp text-[10px] font-extrabold">
-                        <span className="material-symbols-outlined text-[11px]">bolt</span> +10 EXP
+                        <Sparkles className="h-2.5 w-2.5" /> +10 EXP
                       </span>
                     </div>
                   </div>
 
                   <div className="pt-3 pb-2 flex items-center justify-between hover:bg-slate-50/80 px-3 rounded-2xl transition-colors border border-transparent hover:border-slate-200">
                     <div className="flex items-center gap-3.5">
-                      <div className="h-11 w-11 rounded-2xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-700 text-xl shadow-xs">
-                        💰
+                      <div className="h-11 w-11 rounded-2xl bg-emerald-100 border border-emerald-200 flex items-center justify-center text-emerald-700 shadow-xs">
+                        <Wallet className="h-5 w-5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
@@ -586,22 +700,22 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                           <span className="px-2 py-0.5 rounded-full bg-status-safe-bg text-primary text-[10px] font-bold">Income Buff</span>
                         </div>
                         <p className="text-xs text-text-muted flex items-center gap-1 mt-0.5">
-                          <span className="material-symbols-outlined text-xs">schedule</span> Kemarin, 08:00 WIB • Transfer Ortu Guild
+                          <Clock className="h-3 w-3" /> Kemarin, 08:00 WIB • Transfer Ortu Guild
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
                       <p className="font-mono-currency text-sm text-status-safe font-extrabold">+Rp 500.000</p>
                       <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-purple-100 text-gamify-xp text-[10px] font-extrabold">
-                        <span className="material-symbols-outlined text-[11px]">bolt</span> +15 EXP
+                        <Sparkles className="h-2.5 w-2.5" /> +15 EXP
                       </span>
                     </div>
                   </div>
 
                   <div className="pt-3 pb-2 flex items-center justify-between hover:bg-slate-50/80 px-3 rounded-2xl transition-colors border border-transparent hover:border-slate-200">
                     <div className="flex items-center gap-3.5">
-                      <div className="h-11 w-11 rounded-2xl bg-indigo-100 border border-indigo-200 flex items-center justify-center text-secondary text-xl shadow-xs">
-                        📚
+                      <div className="h-11 w-11 rounded-2xl bg-indigo-100 border border-indigo-200 flex items-center justify-center text-secondary shadow-xs">
+                        <BookOpen className="h-5 w-5" />
                       </div>
                       <div>
                         <div className="flex items-center gap-2">
@@ -609,14 +723,14 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                           <span className="px-2 py-0.5 rounded-full bg-indigo-100 text-secondary text-[10px] font-bold">Skill Upgrade</span>
                         </div>
                         <p className="text-xs text-text-muted flex items-center gap-1 mt-0.5">
-                          <span className="material-symbols-outlined text-xs">schedule</span> 3 Maret 2025 • Toko Buku Guild
+                          <Clock className="h-3 w-3" /> 3 Maret 2025 • Toko Buku Guild
                         </p>
                       </div>
                     </div>
                     <div className="text-right">
                       <p className="font-mono-currency text-sm text-status-danger font-extrabold">-Rp 45.000</p>
                       <span className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-md bg-purple-100 text-gamify-xp text-[10px] font-extrabold">
-                        <span className="material-symbols-outlined text-[11px]">bolt</span> +10 EXP
+                        <Sparkles className="h-2.5 w-2.5" /> +10 EXP
                       </span>
                     </div>
                   </div>
@@ -633,13 +747,13 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
             <div className="flex items-center justify-between">
               <div>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-lg">🛡️</span>
+                  <ShieldCheck className="h-5 w-5 text-emerald-600" />
                   <h2 className="font-headline text-base text-text-primary font-extrabold">Shield Anggaran</h2>
                 </div>
                 <p className="text-xs text-text-secondary">Pertahankan shield dari monster boncos</p>
               </div>
               <div className="h-8 w-8 rounded-full bg-status-safe-bg text-status-safe flex items-center justify-center shadow-xs">
-                <span className="material-symbols-outlined text-base">security</span>
+                <ShieldAlert className="h-4 w-4" />
               </div>
             </div>
 
@@ -659,18 +773,17 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                       }`}
                     >
                       <div className="flex items-center justify-between text-xs">
-                        <span className="font-bold text-text-primary flex items-center gap-1">
-                          <span>{b.category.toLowerCase().includes("makan") ? "🥪" : "🎮"}</span>{" "}
-                          {b.category}
+                        <span className="font-bold text-text-primary flex items-center gap-1.5">
+                          <Tag className="h-3.5 w-3.5 text-slate-500" /> {b.category}
                         </span>
                         <span
                           className={`px-2 py-0.5 rounded-full text-[10px] font-extrabold ${
                             isWarning
-                              ? "bg-rose-100 text-status-danger animate-pulse flex items-center gap-0.5"
+                              ? "bg-rose-100 text-status-danger animate-pulse flex items-center gap-1"
                               : "bg-status-safe-bg text-status-safe"
                           }`}
                         >
-                          {isWarning ? `⚠️ Boss Warning! ${percent.toFixed(0)}%` : `Shield Aman • ${percent.toFixed(0)}%`}
+                          {isWarning ? `Boss Warning! ${percent.toFixed(0)}%` : `Shield Aman • ${percent.toFixed(0)}%`}
                         </span>
                       </div>
                       <div className="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
@@ -691,12 +804,12 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                   );
                 })
               ) : (
-                // Mockup default budgets when empty
+                // Clean fallback budgets
                 <>
                   <div className="space-y-1.5 p-3 rounded-xl bg-slate-50 border border-slate-200/60">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-text-primary flex items-center gap-1">
-                        <span>🥪</span> Makanan &amp; Snack
+                      <span className="font-bold text-text-primary flex items-center gap-1.5">
+                        <Utensils className="h-3.5 w-3.5 text-amber-600" /> Makanan &amp; Snack
                       </span>
                       <span className="px-2 py-0.5 rounded-full text-[10px] bg-status-safe-bg text-status-safe font-extrabold">
                         Shield Aman • 70%
@@ -713,11 +826,11 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
 
                   <div className="space-y-1.5 p-3 rounded-xl bg-amber-50/70 border-2 border-amber-300">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-text-primary flex items-center gap-1">
-                        <span>🎮</span> Hiburan &amp; Nongkrong
+                      <span className="font-bold text-text-primary flex items-center gap-1.5">
+                        <Gamepad2 className="h-3.5 w-3.5 text-purple-600" /> Hiburan &amp; Nongkrong
                       </span>
                       <span className="px-2 py-0.5 rounded-full text-[10px] bg-rose-100 text-status-danger font-extrabold flex items-center gap-0.5 animate-pulse">
-                        ⚠️ Boss Warning! 93%
+                        Boss Warning! 93%
                       </span>
                     </div>
                     <div className="w-full bg-amber-200/80 rounded-full h-2.5 overflow-hidden">
@@ -731,8 +844,8 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
 
                   <div className="space-y-1.5 p-3 rounded-xl bg-slate-50 border border-slate-200/60">
                     <div className="flex items-center justify-between text-xs">
-                      <span className="font-bold text-text-primary flex items-center gap-1">
-                        <span>📖</span> Belajar &amp; Buku
+                      <span className="font-bold text-text-primary flex items-center gap-1.5">
+                        <BookOpen className="h-3.5 w-3.5 text-indigo-600" /> Belajar &amp; Buku
                       </span>
                       <span className="px-2 py-0.5 rounded-full text-[10px] bg-status-safe-bg text-status-safe font-extrabold">
                         Shield Solid • 60%
@@ -755,7 +868,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
           <div className="rounded-3xl bg-gradient-to-br from-white to-amber-50/50 p-6 shadow-sm border-2 border-amber-300 relative overflow-hidden space-y-4">
             <div className="flex items-center justify-between">
               <span className="px-2.5 py-0.5 rounded-full bg-amber-200 text-amber-950 font-extrabold text-[10px] uppercase tracking-wider flex items-center gap-1">
-                <span>🏆</span> Main Boss Quest
+                <Trophy className="h-3 w-3" /> Main Boss Quest
               </span>
               <span className="px-2.5 py-0.5 rounded-full text-xs bg-purple-100 text-gamify-xp font-extrabold">
                 {topGoalPercent.toFixed(0)}% HP Tercapai
@@ -763,8 +876,8 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
             </div>
 
             <div className="flex items-center gap-3.5">
-              <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-amber-400 to-yellow-300 p-0.5 shadow-md flex items-center justify-center text-amber-950 text-2xl flex-shrink-0">
-                💻
+              <div className="h-14 w-14 rounded-2xl bg-gradient-to-tr from-amber-400 to-yellow-300 p-0.5 shadow-md flex items-center justify-center text-amber-950 shrink-0">
+                <Laptop className="h-7 w-7 text-amber-950" />
               </div>
               <div className="min-w-0 flex-1">
                 <h3 className="font-headline text-base font-extrabold text-text-primary truncate">
@@ -795,7 +908,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
               href="/savings"
               className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-primary to-emerald-600 hover:from-emerald-700 hover:to-primary text-white font-label-md font-extrabold text-xs transition-all flex items-center justify-center gap-1.5 shadow-md cursor-pointer active:scale-98"
             >
-              <span className="text-base">⚡</span> Tempa Tabungan (+15 EXP)
+              <Sparkles className="h-4 w-4 text-emerald-200" /> Tempa Tabungan (+15 EXP)
             </Link>
           </div>
 
@@ -804,7 +917,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <div className="h-8 w-8 rounded-xl bg-purple-100 text-gamify-xp flex items-center justify-center font-bold">
-                  <span className="text-base">🎯</span>
+                  <Target className="h-4 w-4" />
                 </div>
                 <div>
                   <h2 className="font-headline text-base text-text-primary font-extrabold">
@@ -816,24 +929,24 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
             </div>
 
             <div className="space-y-2.5">
-              {/* Misi 1 */}
+              {/* Misi 1 (Real Database Action) */}
               <div className="p-3 rounded-xl bg-surface-container-low flex items-center justify-between gap-3 border border-border-subtle">
                 <div className="flex items-center gap-2.5">
                   <div className="h-7 w-7 rounded-full bg-status-safe-bg text-status-safe flex items-center justify-center font-bold">
-                    <span className="material-symbols-outlined text-sm">check</span>
+                    <CheckCircle2 className="h-4 w-4" />
                   </div>
                   <div>
                     <p className="font-headline text-xs text-text-primary font-bold">
                       Catat 1 Transaksi Hari Ini
                     </p>
                     <p className="text-[10px] text-text-muted">
-                      {hasClaimedMisi1 ? "Status: Hadiah Diambil ✅" : "Status: Selesai"}
+                      {hasClaimedMisi1 ? "Status: Hadiah Diambil ✓" : "Status: Selesai"}
                     </p>
                   </div>
                 </div>
                 <button
                   onClick={handleClaimMisi1}
-                  disabled={hasClaimedMisi1}
+                  disabled={hasClaimedMisi1 || isClaimingMisi1}
                   className={`px-2.5 py-1.5 rounded-lg font-label-sm text-[11px] font-extrabold transition-opacity flex items-center gap-1 shadow-xs cursor-pointer ${
                     hasClaimedMisi1
                       ? "bg-slate-200 text-slate-500 cursor-not-allowed"
@@ -841,8 +954,12 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                   }`}
                   type="button"
                 >
-                  <span className="material-symbols-outlined text-xs">redeem</span>
-                  {hasClaimedMisi1 ? "Terklaim" : "Klaim 10 EXP"}
+                  {isClaimingMisi1 ? (
+                    <Loader2 className="h-3 w-3 animate-spin" />
+                  ) : (
+                    <Gift className="h-3 w-3" />
+                  )}
+                  <span>{hasClaimedMisi1 ? "Terklaim" : "Klaim 10 EXP"}</span>
                 </button>
               </div>
 
@@ -850,7 +967,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
               <div className="p-3 rounded-xl bg-surface-container-low flex items-center justify-between gap-3 border border-border-subtle">
                 <div className="flex items-center gap-2.5">
                   <div className="h-7 w-7 rounded-full bg-slate-200 text-text-muted flex items-center justify-center">
-                    <span className="material-symbols-outlined text-xs">hourglass_empty</span>
+                    <Hourglass className="h-3.5 w-3.5" />
                   </div>
                   <div>
                     <p className="font-headline text-xs text-text-primary font-bold">
@@ -863,31 +980,31 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
                   href="/investments"
                   className="px-2.5 py-1.5 rounded-lg bg-white border border-secondary/30 text-secondary font-label-sm text-[11px] font-extrabold hover:bg-secondary hover:text-white transition-all shadow-xs flex items-center gap-1"
                 >
-                  Mulai Misi <span className="material-symbols-outlined text-xs">play_arrow</span>
+                  Mulai Misi <Play className="h-3 w-3" />
                 </Link>
               </div>
             </div>
 
-            {/* Koleksi Lencana RPG (Badges showcase) */}
+            {/* Koleksi Lencana RPG (Clean Vector Badges) */}
             <div className="pt-3 border-t border-border-subtle">
               <span className="text-[11px] font-bold text-text-secondary uppercase tracking-wider block mb-2">
                 Lencana Guild Terpasang:
               </span>
-              <div className="flex items-center justify-between gap-2">
-                <div className="flex-1 p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-center">
-                  <span className="text-xl block mb-0.5">🎖️</span>
+              <div className="grid grid-cols-3 gap-2">
+                <div className="p-2 rounded-xl bg-emerald-50 border border-emerald-200 text-center flex flex-col items-center justify-center">
+                  <Medal className="h-5 w-5 text-emerald-600 mb-1" />
                   <span className="text-[10px] font-extrabold text-emerald-900 block leading-tight">
                     Disiplin
                   </span>
                 </div>
-                <div className="flex-1 p-2 rounded-xl bg-purple-50 border border-purple-200 text-center">
-                  <span className="text-xl block mb-0.5">💎</span>
+                <div className="p-2 rounded-xl bg-purple-50 border border-purple-200 text-center flex flex-col items-center justify-center">
+                  <Gem className="h-5 w-5 text-purple-600 mb-1" />
                   <span className="text-[10px] font-extrabold text-purple-900 block leading-tight">
                     Investor
                   </span>
                 </div>
-                <div className="flex-1 p-2 rounded-xl bg-amber-50 border border-amber-200 text-center">
-                  <span className="text-xl block mb-0.5">👑</span>
+                <div className="p-2 rounded-xl bg-amber-50 border border-amber-200 text-center flex flex-col items-center justify-center">
+                  <Crown className="h-5 w-5 text-amber-600 mb-1" />
                   <span className="text-[10px] font-extrabold text-amber-900 block leading-tight">
                     Master S1
                   </span>
@@ -902,7 +1019,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
       {toastMessage && (
         <div className="fixed bottom-6 right-6 transform transition-all duration-300 z-50 animate-bounce">
           <div className="flex items-center gap-3.5 px-5 py-3.5 rounded-2xl bg-gradient-to-r from-secondary via-gamify-xp to-purple-700 text-white shadow-2xl border-2 border-amber-300">
-            <span className="text-2xl">🎉</span>
+            <Trophy className="h-6 w-6 text-amber-300 shrink-0" />
             <div>
               <p className="font-headline text-sm font-extrabold">{toastMessage.title}</p>
               <p className="text-xs text-white/90 font-medium">{toastMessage.desc}</p>
@@ -912,7 +1029,7 @@ export function QuestDashboardView({ data }: QuestDashboardViewProps) {
               className="ml-2 text-white/80 hover:text-white"
               type="button"
             >
-              <span className="material-symbols-outlined text-base">close</span>
+              <X className="h-4 w-4" />
             </button>
           </div>
         </div>

@@ -3,7 +3,7 @@ import React from "react";
 import { redirect } from "next/navigation";
 import { getAuthUser } from "@/server/utils/auth-session";
 import prisma from "@/lib/prisma";
-import { Sidebar } from "@/components/layout/Sidebar";
+import { DashboardShell } from "@/components/layout/DashboardShell";
 
 export default async function DashboardLayout({
   children,
@@ -16,7 +16,7 @@ export default async function DashboardLayout({
     redirect("/login");
   }
 
-  // 2. Ambil data profil & gamifikasi terkini dari database
+  // 2. Ambil data profil & gamifikasi terkini dari database MySQL
   const user = await prisma.user.findUnique({
     where: { id: authUser.sub },
     select: {
@@ -32,23 +32,15 @@ export default async function DashboardLayout({
   }
 
   return (
-    <div className="min-h-screen bg-[#F4F7FC]">
-      {/* Sidebar Navigasi RPG Kiri */}
-      <Sidebar
-        user={{
-          name: user.name,
-          level: user.level,
-          xp: user.xp,
-          virtualBalance: user.virtualBalance.toString(),
-        }}
-      />
-
-      {/* Main Content Area teroffset 280px di desktop */}
-      <div className="pl-0 lg:pl-[280px] min-h-screen flex flex-col">
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">
-          <div className="max-w-7xl mx-auto">{children}</div>
-        </main>
-      </div>
-    </div>
+    <DashboardShell
+      user={{
+        name: user.name,
+        level: user.level,
+        xp: user.xp,
+        virtualBalance: user.virtualBalance.toString(),
+      }}
+    >
+      {children}
+    </DashboardShell>
   );
 }

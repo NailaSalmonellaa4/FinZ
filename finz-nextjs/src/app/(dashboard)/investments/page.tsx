@@ -59,7 +59,7 @@ export default function InvestmentsPage() {
       const res = await fetch("/api/investments/simulate", { method: "POST" });
       const data = await res.json();
       if (data.success) {
-        setToastMessage("📈 Harga aset contoh telah berfluktuasi! Amati perubahan profit/loss portofoliomu.");
+        setToastMessage("Harga aset contoh telah berfluktuasi! Amati perubahan profit/loss portofoliomu.");
         setTimeout(() => setToastMessage(null), 5000);
         fetchData();
       }
@@ -160,7 +160,7 @@ export default function InvestmentsPage() {
 
       if (data.meta?.xpGained) {
         setToastMessage(
-          `🎉 Transaksi ${tradeMode === "BUY" ? "Beli" : "Jual"} Simulasi Berhasil! Kamu meraih +${data.meta.xpGained} XP!`
+          `Transaksi ${tradeMode === "BUY" ? "Beli" : "Jual"} Simulasi Berhasil! Kamu meraih +${data.meta.xpGained} XP!`
         );
         setTimeout(() => setToastMessage(null), 5000);
       }

@@ -99,7 +99,7 @@ export default function BudgetsPage() {
       }
 
       if (data.meta?.xpGained) {
-        setToastMessage(`🎉 Anggaran dibuat! Kamu meraih +${data.meta.xpGained} XP!`);
+        setToastMessage(`Anggaran dibuat! Kamu meraih +${data.meta.xpGained} XP!`);
         setTimeout(() => setToastMessage(null), 5000);
       }
 

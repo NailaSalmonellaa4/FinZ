@@ -108,7 +108,7 @@ export default function TransactionsPage() {
 
       // Tampilkan toast XP jika pengguna mendapatkan poin
       if (data.meta?.xpGained) {
-        setToastMessage(`🎉 Transaksi dicatat! Kamu meraih +${data.meta.xpGained} XP!`);
+        setToastMessage(`Transaksi dicatat! Kamu meraih +${data.meta.xpGained} XP!`);
         setTimeout(() => setToastMessage(null), 5000);
       }
 
@@ -166,7 +166,7 @@ export default function TransactionsPage() {
     document.body.removeChild(link);
     URL.revokeObjectURL(url);
 
-    setToastMessage("📥 Berhasil mengekspor riwayat transaksi ke format CSV!");
+    setToastMessage("Berhasil mengekspor riwayat transaksi ke format CSV!");
     setTimeout(() => setToastMessage(null), 4000);
   }
 

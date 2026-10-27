@@ -100,7 +100,7 @@ export default function SavingsPage() {
       }
 
       if (data.meta?.xpGained) {
-        setToastMessage(`🎉 Target dibuat! Kamu meraih +${data.meta.xpGained} XP!`);
+        setToastMessage(`Target dibuat! Kamu meraih +${data.meta.xpGained} XP!`);
         setTimeout(() => setToastMessage(null), 5000);
       }
 
@@ -145,8 +145,8 @@ export default function SavingsPage() {
       if (data.meta?.xpGained) {
         setToastMessage(
           data.meta.goalCompleted
-            ? `🏆 Luar Biasa! Target tercapai 100%! Kamu meraih BONUS +${data.meta.xpGained} XP!`
-            : `💰 Tabungan bertambah! Kamu meraih +${data.meta.xpGained} XP!`
+            ? `Luar Biasa! Target tercapai 100%! Kamu meraih BONUS +${data.meta.xpGained} XP!`
+            : `Tabungan bertambah! Kamu meraih +${data.meta.xpGained} XP!`
         );
         setTimeout(() => setToastMessage(null), 6000);
       }
