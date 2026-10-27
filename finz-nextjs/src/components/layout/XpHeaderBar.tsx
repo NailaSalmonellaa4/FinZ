@@ -27,7 +27,7 @@ export function XpHeaderBar({ user }: XpHeaderBarProps) {
     try {
       setIsLoggingOut(true);
       await fetch("/api/auth/logout", { method: "POST" });
-      router.push("/login");
+      router.push("/");
       router.refresh();
     } catch (error) {
       console.error("Gagal logout:", error);

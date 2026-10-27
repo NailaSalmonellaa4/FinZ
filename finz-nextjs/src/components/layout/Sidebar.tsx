@@ -21,6 +21,7 @@ import {
   LogOut,
   ShieldAlert,
   Award,
+  Globe,
 } from "lucide-react";
 import { formatCurrency } from "@/lib/formatters";
 
@@ -61,7 +62,7 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
     try {
       setIsLoggingOut(true);
       await fetch("/api/auth/logout", { method: "POST" });
-      router.push("/login");
+      router.push("/");
       router.refresh();
     } catch (err) {
       console.error("Gagal logout:", err);
@@ -254,8 +255,8 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
             </div>
           </div>
         ) : (
-          /* Minimized Character View */
-          <div className="flex flex-col items-center my-3 space-y-2">
+          /* Minimized Character View — hanya avatar profil, 3 icon dihilangkan saat minimize */
+          <div className="flex flex-col items-center my-3">
             <div
               className="relative w-10 h-10 rounded-full p-0.5 bg-gradient-to-tr from-amber-400 to-yellow-300 shadow-md cursor-pointer"
               title={`${userName} (Lv. ${level}) - ${xpInLevel}/100 EXP`}
@@ -266,28 +267,6 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
               <span className="absolute -bottom-1 -right-1 px-1 bg-amber-500 text-white font-extrabold text-[8px] rounded-full">
                 {level}
               </span>
-            </div>
-
-            {/* Mini Currency Icons Stack */}
-            <div className="flex flex-col items-center gap-1 pt-1">
-              <div
-                className="w-8 h-8 rounded-lg bg-amber-50 border border-amber-200 flex items-center justify-center text-amber-700"
-                title={`Gold: ${formatCurrency(virtualBalanceNum)}`}
-              >
-                <Coins className="h-3.5 w-3.5" />
-              </div>
-              <div
-                className="w-8 h-8 rounded-lg bg-purple-50 border border-purple-200 flex items-center justify-center text-purple-700"
-                title={`Gems: ${gemsCount}`}
-              >
-                <Gem className="h-3.5 w-3.5" />
-              </div>
-              <div
-                className="w-8 h-8 rounded-lg bg-rose-50 border border-rose-200 flex items-center justify-center text-rose-700"
-                title="Streak: 5 Hari"
-              >
-                <Flame className="h-3.5 w-3.5" />
-              </div>
             </div>
           </div>
         )}
@@ -355,17 +334,18 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
 
             <div className="flex items-center justify-between px-1 text-xs text-text-secondary pt-0.5">
               <Link
-                href="/missions#faq"
-                className="flex items-center gap-1 hover:text-[#0F172A] transition-colors font-medium text-[11px]"
+                href="/"
+                className="flex items-center gap-1 hover:text-emerald-700 transition-colors font-medium text-[11px]"
+                title="Kunjungi Landing Page FinZ"
               >
-                <HelpCircle className="h-3.5 w-3.5" />
-                Bantuan Guild
+                <Globe className="h-3.5 w-3.5" />
+                Landing Page
               </Link>
               <button
                 onClick={handleLogout}
                 disabled={isLoggingOut}
                 className="flex items-center gap-1 hover:text-rose-600 transition-colors font-medium text-slate-500 text-[11px] disabled:opacity-50"
-                title="Keluar dari akun"
+                title="Keluar dari akun dan kembali ke Landing Page"
               >
                 <LogOut className="h-3.5 w-3.5" />
                 {isLoggingOut ? "..." : "Keluar"}
@@ -375,6 +355,13 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
         ) : (
           /* Minimized Footer */
           <div className="flex flex-col items-center gap-2">
+            <Link
+              href="/"
+              className="p-2 rounded-lg text-slate-500 hover:text-emerald-700 hover:bg-emerald-50 transition-colors"
+              title="Kunjungi Landing Page FinZ"
+            >
+              <Globe className="h-4 w-4" />
+            </Link>
             <Link
               href="/missions#faq"
               className="p-2 rounded-lg text-slate-500 hover:text-[#0F172A] hover:bg-slate-100 transition-colors"
@@ -386,7 +373,7 @@ export function Sidebar({ user, isCollapsed = false, onToggle }: SidebarProps) {
               onClick={handleLogout}
               disabled={isLoggingOut}
               className="p-2 rounded-lg text-slate-500 hover:text-rose-600 hover:bg-rose-50 transition-colors disabled:opacity-50"
-              title="Keluar dari akun"
+              title="Keluar dari akun dan kembali ke Landing Page"
             >
               <LogOut className="h-4 w-4" />
             </button>

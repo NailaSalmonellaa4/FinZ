@@ -10,11 +10,13 @@ import {
   AlertOctagon,
   Sparkles,
   Loader2,
+  Tag,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Card, CardHeader, CardTitle } from "@/components/ui/Card";
 import { Modal } from "@/components/ui/Modal";
 import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
 import { Badge } from "@/components/ui/Badge";
 import { ProgressBar } from "@/components/ui/ProgressBar";
 import { formatCurrency } from "@/lib/formatters";
@@ -326,22 +328,18 @@ export default function BudgetsPage() {
         )}
 
         <form onSubmit={handleUpsertBudget} className="space-y-4">
-          <div>
-            <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
-              Pilih Kategori
-            </label>
-            <select
-              value={formCategory}
-              onChange={(e) => setFormCategory(e.target.value)}
-              className="block w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {TRANSACTION_CATEGORIES.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
+          <Select
+            label="Pilih Kategori"
+            value={formCategory}
+            onChange={(e) => setFormCategory(e.target.value)}
+            icon={<Tag className="h-4 w-4" />}
+          >
+            {TRANSACTION_CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </Select>
 
           <Input
             label="Batas Maksimal Anggaran (Rp)"

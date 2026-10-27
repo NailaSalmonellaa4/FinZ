@@ -12,10 +12,12 @@ import {
   Filter,
   Loader2,
   Download,
+  Tag,
 } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Modal } from "@/components/ui/Modal";
 import { Input } from "@/components/ui/Input";
+import { Select } from "@/components/ui/Select";
 import { Badge } from "@/components/ui/Badge";
 import { formatCurrency, formatDateShort } from "@/lib/formatters";
 import { TRANSACTION_CATEGORIES, type TransactionItem } from "@/types";
@@ -249,30 +251,34 @@ export default function TransactionsPage() {
           <span>Filter:</span>
         </div>
 
-        {/* Filter Tipe */}
-        <select
-          value={selectedType}
-          onChange={(e) => setSelectedType(e.target.value)}
-          className="rounded-xl border border-slate-300 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Semua Tipe</option>
-          <option value="INCOME">Pemasukan</option>
-          <option value="EXPENSE">Pengeluaran</option>
-        </select>
+        {/* Filter Tipe Dropdown */}
+        <div className="w-36">
+          <Select
+            sizeVariant="sm"
+            value={selectedType}
+            onChange={(e) => setSelectedType(e.target.value)}
+          >
+            <option value="">Semua Tipe</option>
+            <option value="INCOME">Pemasukan</option>
+            <option value="EXPENSE">Pengeluaran</option>
+          </Select>
+        </div>
 
-        {/* Filter Kategori */}
-        <select
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-          className="rounded-xl border border-slate-300 bg-slate-50 px-3 py-1.5 text-xs font-semibold text-slate-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="">Semua Kategori</option>
-          {TRANSACTION_CATEGORIES.map((cat) => (
-            <option key={cat} value={cat}>
-              {cat}
-            </option>
-          ))}
-        </select>
+        {/* Filter Kategori Dropdown */}
+        <div className="w-44">
+          <Select
+            sizeVariant="sm"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            <option value="">Semua Kategori</option>
+            {TRANSACTION_CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </Select>
+        </div>
 
         {(selectedType || selectedCategory) && (
           <button
@@ -422,23 +428,19 @@ export default function TransactionsPage() {
             </div>
           </div>
 
-          {/* Kategori Dropdown */}
-          <div>
-            <label className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-slate-700">
-              Kategori
-            </label>
-            <select
-              value={formCategory}
-              onChange={(e) => setFormCategory(e.target.value)}
-              className="block w-full rounded-xl border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 focus:border-blue-500 focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              {TRANSACTION_CATEGORIES.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
+          {/* Kategori Dropdown Kustom */}
+          <Select
+            label="Kategori"
+            value={formCategory}
+            onChange={(e) => setFormCategory(e.target.value)}
+            icon={<Tag className="h-4 w-4" />}
+          >
+            {TRANSACTION_CATEGORIES.map((cat) => (
+              <option key={cat} value={cat}>
+                {cat}
+              </option>
+            ))}
+          </Select>
 
           {/* Nominal */}
           <Input
