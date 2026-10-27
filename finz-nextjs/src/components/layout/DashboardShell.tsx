@@ -48,8 +48,8 @@ export function DashboardShell({ user, children }: DashboardShellProps) {
       <div
         className={`transition-all duration-300 min-h-screen flex flex-col ${
           isMounted && isCollapsed
-            ? "pl-0 lg:pl-[80px]"
-            : "pl-0 lg:pl-[280px]"
+            ? "pl-0 lg:pl-[76px]"
+            : "pl-0 lg:pl-[260px]"
         }`}
       >
         <main className="flex-1 p-4 sm:p-6 lg:p-8">
